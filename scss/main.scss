@@ -1,0 +1,9 @@
+@import "variables";
+@import "fonts";
+@import "header";
+@import "footer";
+@import "layout_main";
+
+body {
+    height: $breakPointTablet;
+}

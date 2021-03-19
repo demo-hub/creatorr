@@ -7,6 +7,10 @@ import cardsApi, { CreateCardPayload } from "../circle-lib/cardsApi";
 import { v4 as uuidv4 } from 'uuid'
 import openPGP from '../circle-lib/openpgp'
 import paymentsApi, { CreateCardPaymentPayload } from "../circle-lib/paymentsApi";
+import { NFTStorage, Blob } from 'nft.storage'
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
  /**
  * Router Definition
@@ -122,3 +126,19 @@ const makeChargeCall = async (cardId: string, cardData: any): Promise<any> => {
       return error;
     }
 }
+
+// POST /store
+
+itemsRouter.post("/store", async (req: Request, res: Response) => {
+  const apiKey = process.env.NFT_STORAGE;
+  console.log(apiKey)
+  if (apiKey) {
+    const client = new NFTStorage({ token: apiKey })
+
+    const content = new Blob(['hello world'])
+    const cid = await client.storeBlob(content)
+    console.log(cid)
+
+    res.status(200).send(cid);
+  }
+});

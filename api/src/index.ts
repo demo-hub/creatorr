@@ -6,7 +6,7 @@
  import express from "express";
  import cors from "cors";
  import helmet from "helmet";
- import { itemsRouter } from "./items/items.router";
+ import { itemsRouter } from "./creatorr/creatorr.router";
  
  dotenv.config();
 

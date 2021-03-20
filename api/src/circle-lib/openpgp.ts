@@ -3,6 +3,8 @@ const openpgpModule = import(
   /* webpackChunkName: "openpgp,  webpackPrefetch: true" */ 'openpgp'
 )
 
+import * as openpgp from 'openpgp'
+
 import atob from 'atob';
 import btoa from 'btoa';
 
@@ -22,7 +24,7 @@ interface PublicKey {
 async function encrypt(dataToEncrypt: object, { keyId, publicKey }: PublicKey) {
   try {
     const decodedPublicKey = atob(publicKey)
-    const openpgp = await openpgpModule
+    // const openpgp = await openpgpModule
     const options = {
       message: openpgp.message.fromText(JSON.stringify(dataToEncrypt)),
       publicKeys: (await openpgp.key.readArmored(decodedPublicKey)).keys,

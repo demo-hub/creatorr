@@ -89,7 +89,7 @@ function getInstance() {
 function getPCIPublicKey() {
   const url = '/v1/encryption/public'
 
-  return instance.get<PublicKey>(url)
+  return instance.get<PublicKey>(url, { headers: { Authorization: `Bearer ${process.env.CIRCLE_API_KEY}` }})
 }
 
 /**
@@ -111,7 +111,7 @@ function createPayment(payload: BasePaymentPayload) {
   if (payload.metadata) {
     payload.metadata.phoneNumber = nullIfEmpty(payload.metadata.phoneNumber)
   }
-  return instance.post(url, payload)
+  return instance.post(url, payload, { headers: { Authorization: `Bearer ${process.env.CIRCLE_API_KEY}` }})
 }
 
 /**

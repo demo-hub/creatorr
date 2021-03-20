@@ -117,7 +117,7 @@ function getTransfers(
  */
 function createTransfer(payload: CreateTransferPayload) {
   const url = '/v1/transfers'
-  return instance.post(url, payload)
+  return instance.post(url, payload, { headers: { Authorization: `Bearer ${process.env.CIRCLE_API_KEY}` }})
 }
 
 export default {

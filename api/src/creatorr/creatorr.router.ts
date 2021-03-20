@@ -35,7 +35,9 @@ itemsRouter.post("/donate", async (req: Request, res: Response) => {
   try {
     const card = await makeCreateCardCall(req.body)
     if (card && card.id) {
-      await makeChargeCall(card.id, req.body)
+      const payment = await makeChargeCall(card.id, req.body);
+
+      res.status(200).send(payment);
     }
   } catch (error) {
     res.status(500).send(error);
@@ -71,7 +73,7 @@ const makeCreateCardCall = async (cardData: any): Promise<any> => {
       const publicKey = await cardsApi.getPCIPublicKey()
       const cardDetails = {
         number: cardData.cardNumber.replace(/\s/g, ''),
-        cvv: cardData.cvv,
+        cvv: cardData.ccv,
       }
 
       const encryptedData = await openPGP.encrypt(cardDetails, publicKey)
@@ -82,7 +84,7 @@ const makeCreateCardCall = async (cardData: any): Promise<any> => {
 
       return await cardsApi.createCard(payload)
     } catch (error) {
-      // console.log(error)
+      console.log(error)
       throw error
     }
 }
@@ -115,16 +117,22 @@ const makeChargeCall = async (cardId: string, cardData: any): Promise<any> => {
     try {
       const cardDetails = { cvv: cardData.cvv }
 
-      const publicKey = await paymentsApi.getPCIPublicKey()
-      const encryptedData = await openPGP.encrypt(cardDetails, publicKey.data)
+      const publicKey = await cardsApi.getPCIPublicKey()
+      const encryptedData = await openPGP.encrypt(cardDetails, publicKey)
+      const { encryptedMessage, keyId } = encryptedData
 
-      payload.encryptedData = encryptedData.encryptedMessage
-      payload.keyId = encryptedData.keyId
+      payload.keyId = keyId
+      payload.encryptedData = encryptedMessage
+
+      console.log(payload)
 
       const payment = await paymentsApi.createPayment(payload)
 
+      return payment;
+
     } catch (error) {
-      return error;
+      // console.log(error)
+      throw error;
     }
 }
 

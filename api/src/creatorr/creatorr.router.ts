@@ -10,6 +10,7 @@ import paymentsApi, { CreateCardPaymentPayload } from "../circle-lib/paymentsApi
 import { NFTStorage, Blob } from 'nft.storage'
 import atob from 'atob';
 import * as dotenv from "dotenv";
+import transfersApi, { CreateTransferPayload } from "../circle-lib/businessAccount/transfersApi";
 
 dotenv.config();
 
@@ -115,7 +116,7 @@ const makeChargeCall = async (cardId: string, cardData: any): Promise<any> => {
     }
 
     try {
-      const cardDetails = { cvv: cardData.cvv }
+      const cardDetails = { cvv: cardData.ccv }
 
       const publicKey = await cardsApi.getPCIPublicKey()
       const encryptedData = await openPGP.encrypt(cardDetails, publicKey)
@@ -123,8 +124,6 @@ const makeChargeCall = async (cardId: string, cardData: any): Promise<any> => {
 
       payload.keyId = keyId
       payload.encryptedData = encryptedMessage
-
-      console.log(payload)
 
       const payment = await paymentsApi.createPayment(payload)
 
@@ -135,6 +134,25 @@ const makeChargeCall = async (cardId: string, cardData: any): Promise<any> => {
       throw error;
     }
 }
+
+// POST /notifications - triggered when a payment changes status
+
+itemsRouter.post("/notifications", async (req: Request, res: Response) => {
+  console.log(req.body)
+  const payload: CreateTransferPayload = {
+    idempotencyKey: uuidv4(),
+    destination: {
+      type: "blockchain",
+      addressId: "0x493A9869E3B5f846f72267ab19B76e9bf99d51b1"
+    },
+    amount: {
+      amount: "1",
+      currency: "USD"
+    }
+  }
+  const response = await transfersApi.createTransfer(payload)
+  res.status(200).send(response);
+});
 
 // POST /store
 

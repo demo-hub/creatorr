@@ -152,7 +152,10 @@ main {
 			}
 			.right {
 				@include flex-element;
-				width: 33.3%;
+				width: 100%;
+				@media screen and (min-width: $breakPointTablet){
+					width: 33.3%;
+				}
 				img {
 					width: 100%;
 				}
@@ -324,6 +327,49 @@ main {
 					.circle {
 						max-width: calc(25% - #{$spacingRegular*0.75});
 						margin-right: $spacingRegular;
+						position: relative;
+						.fab {
+							@include flex-parent;
+							position: absolute;
+							transform: translateY(-50%);
+							color: $darkGray;
+							background: $primaryLight;
+							font-weight: 900;
+							width: $spacingRegular*4;
+							height: $spacingRegular*4;
+							-webkit-box-shadow: 2px 6px 6px 0px rgba(0,0,0,0.16);
+							-moz-box-shadow: 2px 6px 6px 0px rgba(0,0,0,0.16);
+							box-shadow: 2px 6px 6px 0px rgba(0,0,0,0.16);
+							z-index: 999;
+							cursor: pointer;
+							border-radius: $spacingRegular*2;
+							right: -$spacingRegular*2;
+							top: 50%;
+							transform: translateY(-50%);
+							z-index: 9999;
+							&.second {
+								top: 77%;
+								right: 0px;
+							}
+							&.third {
+								top: 92%;right: 38px;
+							}
+							i, b {
+								display: block;
+								font-size: 15px;
+								margin: auto;
+								@include flex-element;
+							}
+							b {
+								font-family: "Poppins", sans-serif;
+							}
+							&:hover {
+								background: $secondaryColor;
+								i, b {
+									color: $primaryLight;
+								}
+							}
+						}
 						img{
 							width: 100%;
 						}

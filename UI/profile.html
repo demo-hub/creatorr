@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="logged_in">
         <div class="top">
             <div class="left">
                 <a href="index.html">
@@ -26,9 +26,43 @@
             <div class="right">
                 <div class="header_right_content">
                     <div class="search_box">
-                        <input type="text" placeholder="Search creator">
+                        <input type="text" placeholder="Search profile">
                     </div>
-                    <a href="#" class="login_button">Login</a>
+                    <div class="logged_in_profile">
+                        <div class="submenu">
+                            <ul>
+                                <li>
+                                    <a href="profile.html">
+                                        <i class="fas fa-user-circle"></i>
+                                        My profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="my_wallet.html">
+                                        <i class="fas fa-wallet"></i>
+                                        My NFT Wallet
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="creator_dashboard.html">
+                                        <i class="fas fa-cogs"></i>
+                                        Settings
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="active" href="index.html">LOG OUT</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="profile-icon">
+                            <img src="img/profile_pic_rosa.png" alt="">
+                        </div>
+                        <span class="name">
+                            <small>Welcome</small>
+                            <b>Rosalie</b>
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
                 </div>
             </div>
         </div>

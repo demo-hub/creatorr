@@ -265,10 +265,15 @@ main .purple_bg .how_does_it_work .left a:hover {
 }
 
 main .purple_bg .how_does_it_work .right {
-    flex-shrink: 0;
-    flex-grow: 0;
-    flex-basis: auto;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  main .purple_bg .how_does_it_work .right {
     width: 33.3%;
+  }
 }
 
 main .purple_bg .how_does_it_work .right img {
@@ -500,8 +505,56 @@ main .gray_bar .creator_nft .left .row {
 }
 
 main .gray_bar .creator_nft .left .row .circle {
-    max-width: calc(25% - 7.5px);
-    margin-right: 10px;
+  max-width: calc(25% - 7.5px);
+  margin-right: 10px;
+  position: relative;
+}
+main .gray_bar .creator_nft .left .row .circle .fab {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: absolute;
+  transform: translateY(-50%);
+  color: #555555;
+  background: #ffffff;
+  font-weight: 900;
+  width: 40px;
+  height: 40px;
+  -webkit-box-shadow: 2px 6px 6px 0px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 2px 6px 6px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 2px 6px 6px 0px rgba(0, 0, 0, 0.16);
+  z-index: 999;
+  cursor: pointer;
+  border-radius: 20px;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+}
+main .gray_bar .creator_nft .left .row .circle .fab.second {
+  top: 77%;
+  right: 0px;
+}
+main .gray_bar .creator_nft .left .row .circle .fab.third {
+  top: 92%;
+  right: 38px;
+}
+main .gray_bar .creator_nft .left .row .circle .fab i, main .gray_bar .creator_nft .left .row .circle .fab b {
+  display: block;
+  font-size: 15px;
+  margin: auto;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+}
+main .gray_bar .creator_nft .left .row .circle .fab b {
+  font-family: "Poppins", sans-serif;
+}
+main .gray_bar .creator_nft .left .row .circle .fab:hover {
+  background: #4700D3;
+}
+main .gray_bar .creator_nft .left .row .circle .fab:hover i, main .gray_bar .creator_nft .left .row .circle .fab:hover b {
+  color: #ffffff;
 }
 
 main .gray_bar .creator_nft .left .row .circle img {
@@ -598,6 +651,97 @@ header.home_header::before {
     bottom: 20%;
     left: -40px;
     z-index: 999;
+}
+header.logged_in {
+  overflow: inherit;
+}
+header.logged_in .right .header_right_content {
+  max-width: 500px !important;
+}
+header.logged_in .right .header_right_content .search_box {
+  width: calc(50% - 10px) !important;
+}
+header.logged_in .right .header_right_content .logged_in_profile {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: calc(50% - 30px);
+  padding: 0 15px !important;
+  position: relative;
+}
+header.logged_in .right .header_right_content .logged_in_profile .submenu {
+  display: none;
+}
+header.logged_in .right .header_right_content .logged_in_profile:hover {
+  cursor: pointer;
+}
+header.logged_in .right .header_right_content .logged_in_profile:hover .submenu {
+  display: block;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  z-index: 9999;
+  -webkit-box-shadow: 2px 6px 6px 0px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 2px 6px 6px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 2px 6px 6px 0px rgba(0, 0, 0, 0.16);
+}
+header.logged_in .right .header_right_content .logged_in_profile:hover .submenu ul {
+  width: 100%;
+  list-style: none;
+}
+header.logged_in .right .header_right_content .logged_in_profile:hover .submenu ul li {
+  width: 100%;
+}
+header.logged_in .right .header_right_content .logged_in_profile:hover .submenu ul li a {
+  min-width: 200px;
+  text-align: left;
+  background: #ffffff;
+  display: block;
+  padding: 15px;
+  color: #151515;
+  border-bottom: 1px solid #F5F5F5;
+}
+header.logged_in .right .header_right_content .logged_in_profile:hover .submenu ul li a i {
+  color: #151515;
+  margin-right: 10px;
+}
+header.logged_in .right .header_right_content .logged_in_profile:hover .submenu ul li a:hover {
+  background-color: #F5F5F5;
+}
+header.logged_in .right .header_right_content .logged_in_profile:hover .submenu ul li a.active {
+  background: #6F00C1;
+  color: #ffffff;
+  font-weight: 700;
+  text-align: center;
+}
+header.logged_in .right .header_right_content .logged_in_profile:hover .submenu ul li a.active:hover {
+  background: #4700D3;
+}
+header.logged_in .right .header_right_content .logged_in_profile .profile-icon {
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  margin: auto auto auto 0;
+}
+header.logged_in .right .header_right_content .logged_in_profile .profile-icon img {
+  max-width: 80%;
+}
+header.logged_in .right .header_right_content .logged_in_profile .name {
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  color: #ffffff;
+  margin: auto;
+}
+header.logged_in .right .header_right_content .logged_in_profile .name small {
+  font-weight: 300;
+}
+header.logged_in .right .header_right_content .logged_in_profile i {
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  color: #ffffff;
+  margin: auto 0 auto auto;
 }
 
 header .top {

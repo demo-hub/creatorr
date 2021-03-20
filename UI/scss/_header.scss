@@ -2,28 +2,31 @@
 header {
     width: 100%;
     @include flex-parent;
+    overflow: hidden;
     position: relative;
-    &::after {
-        content: "";
-        width: 80px;
-        height: 80px;
-        background-image: url(../img/dots.png);
-        background-size: cover;
-        position: absolute;
-        top: 20%;
-        right: -40px;
-        z-index: 999;
-    }
-    &::before {
-        content: "";
-        width: 80px;
-        height: 80px;
-        background-image: url(../img/dots.png);
-        background-size: cover;
-        position: absolute;
-        bottom: 20%;
-        left: -40px;
-        z-index: 999;
+    &.home_header {
+        &::after {
+            content: "";
+            width: 80px;
+            height: 80px;
+            background-image: url(../img/dots.png);
+            background-size: cover;
+            position: absolute;
+            top: 20%;
+            right: -40px;
+            z-index: 999;
+        }
+        &::before {
+            content: "";
+            width: 80px;
+            height: 80px;
+            background-image: url(../img/dots.png);
+            background-size: cover;
+            position: absolute;
+            bottom: 20%;
+            left: -40px;
+            z-index: 999;
+        }
     }
     .top{
         width: 100%;

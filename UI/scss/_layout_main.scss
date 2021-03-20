@@ -165,4 +165,113 @@ main {
 		background: rgb(72,0,211);
 		background: linear-gradient(275deg, rgba(72,0,211,1) 0%, rgba(0,0,0,1) 100%);
 	}
+	.edit_this {
+		position: absolute;
+		left: -$spacingRegular*5;
+		top: 50%;
+    transform: translateY(-50%);
+		color: $darkGray;
+		font-weight: 900;
+		width: $spacingRegular*4;
+		height: $spacingRegular*4;
+		-webkit-box-shadow: 2px 6px 6px 0px rgba(0,0,0,0.16);
+				-moz-box-shadow: 2px 6px 6px 0px rgba(0,0,0,0.16);
+				box-shadow: 2px 6px 6px 0px rgba(0,0,0,0.16);
+				z-index: 999;
+				cursor: pointer;
+				border-radius: $spacingRegular*2;
+				i {
+					display: block;
+					font-size: 15px;
+					margin: $spacingRegular*1.5;
+				}
+	}
+	.dashboard_page {
+		@include flex-parent;
+		@include flex-element;
+		margin-top: $spacingRegular*12;
+		margin-bottom: $spacingRegular*12;
+		width: 100%;
+		h4, p {
+			@include flex-element;
+			width: 100%;
+			position: relative;
+		}
+		.left {
+			@include flex-element;
+			width: calc(25% - #{$spacingRegular*4});
+			padding: 0 $spacingRegular*4 0 0;
+			img {
+				width: 100%;
+				max-width: 100%;
+			}
+		}
+		.center {
+			@include flex-element;
+			width: 40%;
+		}
+		.right {
+			@include flex-element;
+			width: calc(35% - #{$spacingRegular*4});
+			padding: 0 $spacingRegular*2;
+			.earnings {
+				width: 100%;
+				max-width: 250px;
+				margin-top: $spacingRegular*2;
+				margin-bottom: $spacingRegular*2;
+				margin: auto;
+				b:first-child {
+					width: 100%;
+					display: block;
+					text-align: left;
+				}
+				h4 {
+					width: 100%;
+					display: block;
+					text-align: center;
+					font-size: $headerFontSize;
+					color: $primaryDark;
+					font-family: 'Poppins', sans-serif;
+				}
+				b:last-child {
+					width: 100%;
+					display: block;
+					text-align: right;
+				}
+			}
+			.input_option{
+				width: 100%;
+				margin-top: $spacingRegular*2;
+				margin-bottom: $spacingRegular*2;
+				@include flex-parent;
+				b {
+					@include flex-element;
+					width: calc(50% - #{$spacingRegular*4});
+					padding-left: $spacingRegular*4;
+					padding-top: $spacingRegular;
+				}
+				.input_wrap {
+					@include flex-element;
+					width: calc(50% - #{$spacingRegular*2});
+					padding: 0 $spacingRegular;
+					select {
+						width: 100%;
+						padding: $spacingRegular;
+					}
+				}
+			}
+			.details_wrap {
+				width: calc(100% - #{$spacingRegular*4});
+				margin-top: $spacingRegular*2;
+				margin-bottom: $spacingRegular*2;
+				@include flex-parent;
+				padding: 0 $spacingRegular;
+				padding-left: $spacingRegular*4;
+				input {
+					width: 100%;
+					padding: $spacingRegular;
+				}
+			}
+		}
+	}
 }

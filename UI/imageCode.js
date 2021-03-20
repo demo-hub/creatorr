@@ -32,6 +32,7 @@ function CreatorrInfo(x,y,width,height,imageURL,cardRarityTitle,creatorText,date
 };
 
 function init() {
+<<<<<<< Updated upstream
 
   // Throwaway code to display in HTML
   canvas = document.getElementById('myCanvas');
@@ -65,6 +66,40 @@ function init() {
   addImage(ctx,creatorrInfo)
 }
 
+=======
+  const { createCanvas, loadImage } = require('canvas')
+  const canvas = createCanvas(500, 500)
+  ctx=canvas.getContext('2d');
+
+  // custom creator object to handle properties passed in from backend to frontend
+  let creatorrInfo = new CreatorrInfo();
+  creatorrInfo.x = 0
+  creatorrInfo.y = 0
+  creatorrInfo.width = 500 // should be based on image width
+  creatorrInfo.height = 500 // should be based on image height
+
+  // image should be passed in to iterate over
+  creatorrInfo.imageURL = "https://i.ibb.co/ZVFrj7V/Image-Doggo-1.jpg";
+
+  // adjust rarity based on some randomness
+  creatorrInfo.cardRarityTitle = rarity.RARE
+  // should be passed in as two components, first the collection then the creator
+  creatorrInfo.creatorText = "Founder's Edition by: d0gg0"
+
+  // hardcoded format and to now
+  creatorrInfo.date = getDateString()
+
+  // this randomness could/should come from another source
+  let borderColor = randomColor()
+  creatorrInfo.borderColor = borderColor
+  creatorrInfo.textColor = idealTextColor(borderColor)
+
+  // Serial number should come from the version of the card in the collection? Assuming unique copies
+  creatorrInfo.serialNumber = "0000001"
+  addImage(ctx,creatorrInfo)
+}
+
+>>>>>>> Stashed changes
 function addImage(ctx,creatorrInfo) {
   const image = new Image();
   image.onload = function(){

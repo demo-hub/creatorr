@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,11 @@
     <link rel="icon" type="image/png" href="favicon.png" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script type="text/javascript" src="imageCode.js"></script>
 </head>
+
 <body>
     <header>
         <div class="top">
@@ -29,7 +33,7 @@
             </div>
         </div>
     </header>
-    
+
     <main>
         <div class="container dashboard_page">
             <div class="left">
@@ -44,12 +48,109 @@
                 </p>
                 <div class="divider_fourty"></div>
                 <p>
-                    Creatorr is a platform on the blockchain which helps creators such as YouTubers Streamers and Artists receive financial support from their fans. Their fans in return earn unique dynamic NFT tokens from their favorite content creator. 
+                    Creatorr is a platform on the blockchain which helps creators such as YouTubers Streamers and Artists receive financial support from their fans. Their fans in return earn unique dynamic NFT tokens from their favorite content creator.
                 </p>
-                <a href="#do_support_thingy">SUPPORT THIS CREATORR</a>
+                <a data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="init()">SUPPORT THIS CREATORR</a>
+            </div>
+            <!-- The Payments Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Support your favorite creator</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Amount ($)</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Amount to donate">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Card number</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your card number">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">CVV</label>
+                                    <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="CVV">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Expiry</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="MM/YY">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Description</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Optional description">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Description</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Optional description">
+                                </div>
+                                <p style="font-weight: bold;">Billing Details</p>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Cardholder Name</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Cardholder name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Address Line 1</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Address Line 1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Address Line 2</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Address Line 2">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Postalcode</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Postalcode">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">City</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="City">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">District</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="District">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Country Code</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Country Code">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Phone number</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Phone number with region indicative">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="customer@creatorr.com">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">Make payment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thank you! Here's your NFT</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <canvas id="myCanvas" width=500 height=500></canvas>
+                            <a id="imageLink" href="#"></a>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="right">
-                
+
             </div>
         </div>
         <div class="gray_bar">
@@ -69,7 +170,7 @@
                     </div>
                 </div>
                 <div class="right">
-                
+
                 </div>
             </div>
         </div>
@@ -107,6 +208,35 @@
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 
 </html>
+
+<!-- <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script> -->

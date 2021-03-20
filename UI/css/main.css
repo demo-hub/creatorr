@@ -439,6 +439,54 @@ main .gray_bar .creator_nft .left .row {
 main .gray_bar .creator_nft .left .row .circle {
   max-width: calc(25% - 7.5px);
   margin-right: 10px;
+  position: relative;
+}
+main .gray_bar .creator_nft .left .row .circle .fab {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: absolute;
+  transform: translateY(-50%);
+  color: #555555;
+  background: #ffffff;
+  font-weight: 900;
+  width: 40px;
+  height: 40px;
+  -webkit-box-shadow: 2px 6px 6px 0px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 2px 6px 6px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 2px 6px 6px 0px rgba(0, 0, 0, 0.16);
+  z-index: 999;
+  cursor: pointer;
+  border-radius: 20px;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+}
+main .gray_bar .creator_nft .left .row .circle .fab.second {
+  top: 77%;
+  right: 0px;
+}
+main .gray_bar .creator_nft .left .row .circle .fab.third {
+  top: 92%;
+  right: 38px;
+}
+main .gray_bar .creator_nft .left .row .circle .fab i, main .gray_bar .creator_nft .left .row .circle .fab b {
+  display: block;
+  font-size: 15px;
+  margin: auto;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+}
+main .gray_bar .creator_nft .left .row .circle .fab b {
+  font-family: "Poppins", sans-serif;
+}
+main .gray_bar .creator_nft .left .row .circle .fab:hover {
+  background: #4700D3;
+}
+main .gray_bar .creator_nft .left .row .circle .fab:hover i, main .gray_bar .creator_nft .left .row .circle .fab:hover b {
+  color: #ffffff;
 }
 main .gray_bar .creator_nft .left .row .circle img {
   width: 100%;

@@ -116,7 +116,7 @@ const makeChargeCall = async (cardId: string, cardData: any): Promise<any> => {
     }
 
     try {
-      const cardDetails = { cvv: cardData.cvv }
+      const cardDetails = { cvv: cardData.ccv }
 
       const publicKey = await cardsApi.getPCIPublicKey()
       const encryptedData = await openPGP.encrypt(cardDetails, publicKey)

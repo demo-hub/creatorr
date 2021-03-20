@@ -183,7 +183,13 @@ main {
 				i {
 					display: block;
 					font-size: 15px;
-					margin: $spacingRegular*1.5;
+					margin: $spacingRegular*1.25;
+				}
+				&:hover {
+					background: $secondaryColor;
+					i {
+						color: $primaryLight;
+					}
 				}
 	}
 	.dashboard_page {
@@ -201,14 +207,35 @@ main {
 			@include flex-element;
 			width: calc(25% - #{$spacingRegular*4});
 			padding: 0 $spacingRegular*4 0 0;
-			img {
-				width: 100%;
-				max-width: 100%;
+			.profile_wrap {
+				position: relative;
+				img {
+					width: 100%;
+					max-width: 100%;
+				}
 			}
 		}
 		.center {
 			@include flex-element;
 			width: 40%;
+			a {
+				display: block;
+				width: calc(100% - #{$spacingRegular*4});
+				padding: $spacingRegular*1.25 $spacingRegular*2;
+				border-radius: $spacingRegular * 5;
+				max-width: 300px;
+				text-align: center;
+				color: $primaryLight;
+				background: rgb(72,0,211);
+				margin-top: $spacingRegular*2;
+				background: linear-gradient(223deg, rgba(72,0,211,1) 0%, rgba(111,0,193,1) 100%);
+				text-transform: uppercase;
+				letter-spacing: 2px;
+				&:hover {
+					background: rgb(111,0,193);
+					background: linear-gradient(306deg, rgba(111,0,193,1) 0%, rgba(72,0,211,1) 100%);
+				}
+			}
 		}
 		.right {
 			@include flex-element;
@@ -270,6 +297,77 @@ main {
 				input {
 					width: 100%;
 					padding: $spacingRegular;
+				}
+			}
+		}
+	}
+	.gray_bar {
+		width: 100%;
+		background-color: $lightGray;
+		.creator_nft {
+			@include flex-parent;
+			@include flex-element;
+			margin-top: $spacingRegular*6;
+			margin-bottom: $spacingRegular*6;
+			width: 100%;
+			.left {
+				@include flex-element;
+				width: calc(66.6% - #{$spacingRegular*4});
+				padding: 0 $spacingRegular*4 0 0;
+				b {
+					letter-spacing: 2px;
+				}
+				.row {
+					@include flex-parent;
+					width: 100%;
+					margin-top: $spacingRegular*4;
+					.circle {
+						max-width: calc(25% - #{$spacingRegular*0.75});
+						margin-right: $spacingRegular;
+						img{
+							width: 100%;
+						}
+						&:last-child {
+							margin-right: 0;
+						}
+					}
+				}
+			}
+			.right {
+				@include flex-element;
+				width: calc(33.3% - #{$spacingRegular*4});
+				padding: 0 $spacingRegular*2;
+				.input_option{
+					width: 100%;
+					margin-bottom: $spacingRegular*2;
+					@include flex-parent;
+					b {
+						@include flex-element;
+						width: calc(50% - #{$spacingRegular*4});
+						padding-left: $spacingRegular*4;
+						padding-top: $spacingRegular;
+					}
+					.input_wrap {
+						@include flex-element;
+						width: calc(50% - #{$spacingRegular*2});
+						padding: 0 $spacingRegular;
+						select {
+							width: 100%;
+							padding: $spacingRegular;
+						}
+					}
+				}
+				.row {
+					@include flex-parent;
+					width: 100%;
+					margin-top: $spacingRegular*4;
+					.circle {
+						width: 100%;
+						img{
+							max-width: 100%;
+							float: right;
+						}
+					}
 				}
 			}
 		}

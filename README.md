@@ -17,6 +17,8 @@
 - Run npm run dev;
 - You should see "Listening on port 5000" on the console and if you open the browser on localhost:5000 you should see "It's working!"
 
+### NFT Minter
+- Go to 
 ### Resources
 
 #### Generate Circle API Key

@@ -1,9 +1,19 @@
 @import "variables";
 @import "fonts";
+@import "layout_elements";
+@import "layout_main";
 @import "header";
 @import "footer";
-@import "layout_main";
 
+* {
+    padding: 0;
+    margin: 0;
+}
 body {
-    height: $breakPointTablet;
+    @include flex-parent;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+a {
+    text-decoration: none;
 }

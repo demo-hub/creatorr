@@ -1,20 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script type="text/javascript" src="imageCode.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
-
 <body>
-    <!-- Need help setting up dependencies for 'fs' so we can export image -->
-    <button onclick="init()">Generate Image</button>
-    <canvas id="myCanvas" width=500 height=500></canvas>
-    <button onClick="exportImage()">Upload</button>
+    <header>
+        <div class="top">
+            <div class="left">
+                <a href="#">
+                    <img src="img/logo_small.png" alt="" width="165">
+                </a>
+            </div>
+            <div class="right">
+                <div class="header_right_content">
+                    <div class="search_box">
+                        <input type="text" placeholder="Search creator">
+                    </div>
+                    <a href="#" class="login_button">Login</a>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="image_wrap">
+                <img src="img/logo_large.png" alt="">
+            </div>
+            <div class="cta_buttons">
+                <div class="left">
+                    <a href="#search_creator">FIND YOUR CREATOR</a>
+                </div>
+                <div class="right">
+                    <a href="#">CREATE ACCOUNT</a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <img src="img/bottom_header.png" alt="">
+        </div>
+    </header>
+    
+    <main>
+        <div class="container what_is_it">
+            <h4>Creatorr</h4>
+            <p>
+                <span class="subtext">What is it?</span>
+            </p>
+            <div class="divider_fourty"></div>
+            <p>
+                Creatorr is a platform on the blockchain which helps creators such as YouTubers Streamers and Artists receive financial support from their fans. Their fans in return earn unique dynamic NFT tokens from their favorite content creator. 
+            </p>
+            <div class="divider_eighty"></div>
+        </div>
+        <div class="container search_creator" id="search_creator">
+            <div class="search_box">
+                <input type="text" placeholder="Search your creator of choice">
+            </div>
+            <div class="search_results">
+                <div class="card">
+                    <div class="top">
+                        <div class="left">
+                            <img src="img/profile_pic.png" alt="">
+                        </div>
+                        <div class="right">
+                            <b>
+                                Rosalie
+                            </b>
+                            <p>Tiktok</p>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <p>Collectables</p>
+                        <div class="row">
+                            <div class="circle">
+                                <img src="img/nft1.png" alt="">
+                            </div>
+                            <div class="circle">
+                                <img src="img/nft2.png" alt="">
+                            </div>
+                            <div class="circle">
+                                <img src="img/nft3.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="top">
+                        <div class="left">
+                            <img src="img/profile_pic.png" alt="">
+                        </div>
+                        <div class="right">
+                            <b>
+                                Rosalie
+                            </b>
+                            <p>Tiktok</p>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <p>Collectables</p>
+                        <div class="row">
+                            <div class="circle">
+                                <img src="img/nft1.png" alt="">
+                            </div>
+                            <div class="circle">
+                                <img src="img/nft2.png" alt="">
+                            </div>
+                            <div class="circle">
+                                <img src="img/nft3.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="top">
+                        <div class="left">
+                            <img src="img/profile_pic.png" alt="">
+                        </div>
+                        <div class="right">
+                            <b>
+                                Rosalie
+                            </b>
+                            <p>Tiktok</p>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <p>Collectables</p>
+                        <div class="row">
+                            <div class="circle">
+                                <img src="img/nft1.png" alt="">
+                            </div>
+                            <div class="circle">
+                                <img src="img/nft2.png" alt="">
+                            </div>
+                            <div class="circle">
+                                <img src="img/nft3.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="top">
+                        <div class="left">
+                            <img src="img/profile_pic.png" alt="">
+                        </div>
+                        <div class="right">
+                            <b>
+                                Rosalie
+                            </b>
+                            <p>Tiktok</p>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <p>Collectables</p>
+                        <div class="row">
+                            <div class="circle">
+                                <img src="img/nft1.png" alt="">
+                            </div>
+                            <div class="circle">
+                                <img src="img/nft2.png" alt="">
+                            </div>
+                            <div class="circle">
+                                <img src="img/nft3.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="divider_purple_top">
+            <img src="img/divider_top_purple.png" alt="">
+        </div>
+        <div class="purple_bg">
+            <div class="container how_does_it_work">
+                <div class="left">
+                    <h4>Creatorr</h4>
+                    <p>
+                        <span class="subtext">What is it?</span>
+                    </p>
+                    <div class="divider_fourty"></div>
+                    <p>
+                        On Creatorr, your fans can become active participants in the work and creatorr that they love by offering them direct donations thought the Creatorr program. 
+<br><br>
+In exchange the creator will get the direct payment and the fan get a unique dynamic NFT as reward.
+                    </p>
+                    <a href="#">
+                        create account
+                    </a>
+                </div>
+                <div class="right">
+                    <img src="img/graphic1.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="divider_gradient_ten"></div>
+    </main>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 var canvas, ctx;
 let dataURL = '';
+let ipfsHash = '';
 
 const borderColor = {
     COMMON: "#000000",
@@ -81,6 +82,8 @@ function addImage(ctx, creatorrInfo) {
 
         dataURL = dataURL.replace(/^data:image\/(png|jpeg);base64,/, "");
 
+        exportImage();
+
         /* const img = new Image();
 
         img.src = dataURL;
@@ -91,7 +94,6 @@ function addImage(ctx, creatorrInfo) {
     // exportImage(image);
 }
 
-// TEST CODE DOES NOT WORK YET
 function exportImage() {
     const http = new XMLHttpRequest();
     http.open('POST', 'https://nft.storage/api/upload')
@@ -114,7 +116,10 @@ function exportImage() {
     formData.append("file", new File(byteArrays, 'test_1.png'));
     http.onload = function() {
         if (http.readyState == 4 && http.status == "200") {
-            console.log(http.responseText);
+            console.log(JSON.parse(http.responseText));
+            document.getElementById('imageLink').href = 'https://ipfs.io/ipfs/' + JSON.parse(http.responseText).value.cid + '/test_1.png';
+            document.getElementById('imageLink').textContent = 'https://ipfs.io/ipfs/' + JSON.parse(http.responseText).value.cid + '/test_1.png';
+            console.log(document.getElementById('imageLink'))
         } else {
             console.error("error", http.responseText);
         }

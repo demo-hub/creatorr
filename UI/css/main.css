@@ -1100,5 +1100,24 @@ a {
     width: 110% !important;
 }
 
+.form-control {
+    width: 90% !important;
+}
+
+.btn-primary {
+    background-color: #6F00C1;
+    border-color: #6F00C1;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #4700D3;
+    border-color: #4700D3;
+}
+
 
 /*# sourceMappingURL=main.css.map */

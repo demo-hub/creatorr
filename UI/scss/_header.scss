@@ -28,6 +28,91 @@ header {
             z-index: 999;
         }
     }
+    &.logged_in {
+        overflow: inherit;
+        .right {
+            .header_right_content{
+                max-width: 500px !important;
+                .search_box {
+                    width: calc(50% - #{$spacingRegular}) !important;
+                }
+                .logged_in_profile {
+                    @include flex-parent;
+                    width: calc(50% - #{$spacingRegular*3});
+                    padding: 0 $spacingRegular*1.5 !important;
+                    position: relative;
+                    .submenu {
+                        display: none;
+                    }
+                    &:hover {
+                        cursor: pointer;
+                        .submenu {
+                            display: block;
+                            position: absolute;
+                            top: 40px;
+                            right: 0;
+                            z-index: 9999;
+                            -webkit-box-shadow: 2px 6px 6px 0px rgb(0 0 0 / 16%);
+                            -moz-box-shadow: 2px 6px 6px 0px rgba(0, 0, 0, 0.16);
+                            box-shadow: 2px 6px 6px 0px rgb(0 0 0 / 16%);
+                            ul {
+                                width: 100%;
+                                list-style: none;
+                                li {
+                                    width: 100%;
+                                    a {
+                                        min-width: 200px;
+                                        text-align: left;
+                                        background: $primaryLight;
+                                        display: block;
+                                        padding: $spacingRegular*1.5;
+                                        color: $primaryDark;
+                                        border-bottom: 1px solid $lightGray;
+                                        i {
+                                            color: $primaryDark;
+                                            margin-right: $spacingRegular;
+                                        }
+                                        &:hover {
+                                            background-color: $lightGray;
+                                        }
+                                        &.active {
+                                            background: $primaryColor;
+                                            color: $primaryLight;
+                                            font-weight: 700;
+                                            text-align: center;
+                                            &:hover {
+                                                background: $secondaryColor;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .profile-icon {
+                        @include flex-element;
+                        margin: auto auto auto 0;
+                        img {
+                            max-width: 80%;
+                        }
+                    }
+                    .name {
+                        @include flex-element;
+                        color: $primaryLight;
+                        margin: auto;
+                        small {
+                            font-weight: 300;
+                        }
+                    }
+                    i {
+                        @include flex-element;
+                        color: $primaryLight;
+                        margin: auto 0 auto auto;
+                    }
+                }
+            }
+        }
+    }
     .top{
         width: 100%;
         @include flex-parent;
@@ -96,6 +181,7 @@ header {
                 }
             }
         }
+    
     }
     .center {
         width: 100%;

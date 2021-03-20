@@ -152,7 +152,10 @@ main {
 			}
 			.right {
 				@include flex-element;
-				width: 33.3%;
+				width: 100%;
+				@media screen and (min-width: $breakPointTablet){
+					width: 33.3%;
+				}
 				img {
 					width: 100%;
 				}

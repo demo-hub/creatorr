@@ -25,7 +25,7 @@ const Form = ({ signerAddress, setIsLoading, setTrsHash, setErr, networkId, setO
   let [desc, setDesc] = useState('');
   const [surl, setSurl] = useState('');
   const [file, setFile] = useState(null);
-  const [imgSrc, setImgSrc] = useState("");
+  let [imgSrc, setImgSrc] = useState("");
   const [nftType, setNftType] = useState('ERC721');
   const [ercTwoNum, setErcTwoNum] = useState(1);
   const [errors, setErrors] = useState({
@@ -43,6 +43,10 @@ const Form = ({ signerAddress, setIsLoading, setTrsHash, setErr, networkId, setO
 
   if (query.description) {
     desc = query.description
+  }
+
+  if (query.img) {
+    imgSrc = query.img
   }
 
   // validate form
@@ -76,7 +80,7 @@ const Form = ({ signerAddress, setIsLoading, setTrsHash, setErr, networkId, setO
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (name && desc && file && signerAddress && (networkId.chainId === 80001 || networkId.chainId === 137)) {
+    if (name && desc && signerAddress && (networkId.chainId === 80001 || networkId.chainId === 137)) {
       setIsLoading(true);
       setErr('');
       setTrsHash('');
@@ -202,13 +206,15 @@ const Form = ({ signerAddress, setIsLoading, setTrsHash, setErr, networkId, setO
       <div className={classes.endCont}>
 
         <div className={classes.formGroup} style={{ margin: '0.5rem 0' }}>
-          <label className={classes.formGroupLabel}>Add Logo for your NFT</label>
+          <label className={classes.formGroupLabel}>Your NFT</label>
           <div className={classes.formGroupFile}>
-            <input accept="image/*" id="upload-company-logo" onChange={handleFile} type='file' hidden />
+            {/* <input accept="image/*" id="upload-company-logo" onChange={handleFile} type='file' hidden /> */}
             <label htmlFor="upload-company-logo">
               <Button component="span" >
                 <Paper elevation={5}>
-                  <Avatar src={imgSrc} className={classes.avatar} variant='rounded' />
+                  <Avatar src={imgSrc} className={classes.avatar} variant='rounded' onClick={(e) => {
+                    window.open(imgSrc)
+                  }}/>
                 </Paper>
               </Button>
             </label>
@@ -259,6 +265,10 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
       width: 200,
     },
+    '& .MuiAvatar-root': {
+      width: 180,
+      height: 180
+    }
   },
   error: {
     margin: '2px 0px',

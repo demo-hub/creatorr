@@ -102,7 +102,7 @@ const Form = ({ signerAddress, setIsLoading, setTrsHash, setErr, networkId, setO
         const web3 = new Web3(window.ethereum)
         const contract_721 = new web3.eth.Contract(abi, "0xD05a795d339886bB8Dd46cfe2ac009d7f1E48A64");
 
-        const txnhash = await contract_721.methods.mintToCaller(signerAddress, 'https://ipfs.io/ipfs/bafybeihyudb4bv6loxwbjnj34une7v4tpssm2lc4a6x7cqgotxq7xugbam/test_1.png')
+        const txnhash = await contract_721.methods.mintToCaller(signerAddress, imgSrc)
           .send({ from: signerAddress })
           .on("confirmation", (confirmationNumber, receipt) => { })
           .on("error", (error, receipt) => {

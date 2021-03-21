@@ -48,7 +48,7 @@ function init() {
     creatorrInfo.height = 500 // should be based on image height
 
     // image should be passed in to iterate over
-    creatorrInfo.imageURL = "https://i.ibb.co/ZVFrj7V/Image-Doggo-1.jpg";
+    creatorrInfo.imageURL = getRandomImage();
 
     // adjust rarity based on some randomness
     creatorrInfo.cardRarityTitle = getRandomRarity();
@@ -303,4 +303,11 @@ function makeId(length) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
+}
+
+function getRandomImage() {
+    var num = Math.random();
+    if (num < 0.3) return "img/nft1.jpg";
+    else if (num < 0.7) return "img/nft2.jpg";
+    return "img/nft3.jpg";
 }

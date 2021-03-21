@@ -15,7 +15,7 @@
     <script type="text/javascript" src="imageCode.js"></script>
 </head>
 
-<body>
+<body onload="loadName()">
     <header class="logged_in">
         <div class="top">
             <div class="left">
@@ -73,8 +73,8 @@
                 </div>
             </div>
             <div class="center">
-                <h4>
-                    Joao "Mr beast"
+                <h4 id="creator_name">
+                    
                 </h4>
                 <p>
                     <span class="subtext">YouTube</span>
@@ -242,6 +242,32 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script>
+      function loadName() {
+        var profileName =document.getElementById('creator_name');
+        var params = getParams();
+        profileName.innerHTML = params[0].value;
+      };
+
+      function getParams() {
+        var idx = document.URL.indexOf('?');
+        var dict = [];
+        if (idx != -1) {
+          var pairs = document.URL.substring(idx+1, document.URL.length).split('&');
+          for (var i=0; i<pairs.length; i++) {
+              nameVal = pairs[i].split('=');
+              let element = nameVal[0];
+              let value = nameVal[1];
+              dict.push({
+                  element:   element,
+                  value: value
+              });
+          }
+        }
+        return dict;
+      }
+    </script>
+
 </body>
 
 </html>

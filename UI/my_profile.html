@@ -101,7 +101,7 @@
                             <div class="fab second">
                                 <i class="fas fa-exchange-alt"></i>
                             </div>
-                            <div class="fab third">
+                            <div onclick="goToMinter('img1')" class="fab third">
                                 <b>M</b>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                             <div class="fab second">
                                 <i class="fas fa-exchange-alt"></i>
                             </div>
-                            <div class="fab third">
+                            <div onclick="goToMinter('img2')" class="fab third">
                                 <b>M</b>
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                             <div class="fab second">
                                 <i class="fas fa-exchange-alt"></i>
                             </div>
-                            <div class="fab third">
+                            <div onclick="goToMinter('img3')" class="fab third">
                                 <b>M</b>
                             </div>
                         </div>
@@ -187,6 +187,12 @@
             img3.src = JSON.parse(images).array[JSON.parse(images).array.length - 3];
             const img3_a = document.getElementById("img3_link");
             img3_a.href = JSON.parse(images).array[JSON.parse(images).array.length - 3];
+        }
+
+        function goToMinter(imgSelector) {
+            const img = document.getElementById(imgSelector);
+
+            window.open(`https://fathomless-escarpment-57750.herokuapp.com/?nft_name=${encodeURIComponent("Mr Beast Founder's Edition")}&description=${encodeURIComponent("Some random description")}&img=${img.src}`);
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>

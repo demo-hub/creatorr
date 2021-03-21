@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Web3 from 'web3'
 
+import { useRouter } from 'next/router'
+
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import Paper from "@material-ui/core/Paper";
@@ -19,8 +21,8 @@ const Form = ({ signerAddress, setIsLoading, setTrsHash, setErr, networkId, setO
   const classes = useStyles();
 
   // hooks
-  const [name, setName] = useState('');
-  const [desc, setDesc] = useState('');
+  let [name, setName] = useState('');
+  let [desc, setDesc] = useState('');
   const [surl, setSurl] = useState('');
   const [file, setFile] = useState(null);
   const [imgSrc, setImgSrc] = useState("");
@@ -31,6 +33,17 @@ const Form = ({ signerAddress, setIsLoading, setTrsHash, setErr, networkId, setO
     desc: "",
     file: ""
   })
+
+  const router = useRouter()
+  const { query } = router
+
+  if (query.nft_name) {
+    name = query.nft_name
+  }
+
+  if (query.description) {
+    desc = query.description
+  }
 
   // validate form
   const validateName = () => {

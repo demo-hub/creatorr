@@ -288,7 +288,7 @@ function getDateString() {
 
 function getRandomRarity() {
     var num = Math.random();
-    if (num < 0.3) return rarity.COMMON; //probability 0.3
+    if (num < 0.3) return rarity.ULTRARARE; //probability 0.3
     else if (num < 0.5) return rarity.UNCOMMON; // probability 0.2
     else if (num < 0.7) return rarity.RARE; //probability 0.2
     else if (num < 0.9) return rarity.SUPERRARE; //probability 0.2

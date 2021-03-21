@@ -29,7 +29,7 @@ const lightMuiTheme = createMuiTheme({
   type: "light",
   palette: {
     primary: {
-      main: "#FFF"
+      main: "#a484e4"
     },
     secondary: {
       main: amber[500],
@@ -50,7 +50,7 @@ const lightMuiTheme = createMuiTheme({
     },
     palette: {
       iconColor: "#5f6368",
-      btn: "#cceabb"
+      btn: "#975ddd"
     }
   }
 });
@@ -59,7 +59,7 @@ const darkMuiTheme = createMuiTheme({
   type: "dark",
   palette: {
     primary: {
-      main: "#33313b"
+      main: "#a484e4"
     },
     secondary: {
       main: amber[500],
@@ -84,7 +84,7 @@ const darkMuiTheme = createMuiTheme({
     },
     palette: {
       iconColor: "#949596",
-      btn: "#4592af"
+      btn: "#975ddd"
     }
   }
 });

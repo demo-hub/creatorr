@@ -1,6 +1,7 @@
 var canvas, ctx;
 let dataURL = '';
 let ipfsHash = '';
+let creatorr;
 
 // Enums for rarity types
 const rarity = {
@@ -64,6 +65,7 @@ function init() {
 
     // Serial number should come from the version of the card in the collection? Assuming unique copies
     creatorrInfo.serialNumber = makeId(7)
+    creatorr = creatorrInfo;
     addImage(ctx, creatorrInfo)
 }
 
@@ -82,8 +84,6 @@ function addImage(ctx, creatorrInfo) {
 
         dataURL = dataURL.replace(/^data:image\/(png|jpeg);base64,/, "");
 
-        exportImage();
-
         /* const img = new Image();
 
         img.src = dataURL;
@@ -95,6 +95,24 @@ function addImage(ctx, creatorrInfo) {
 }
 
 function exportImage() {
+    if (creatorr.cardRarityTitle == 'UR') {
+        const startit = () => {
+            setTimeout(function() {
+                console.log("start");
+                confetti.start();
+            }, 1000);
+        };
+
+        const stopit = () => {
+            setTimeout(function() {
+                console.log("stop");
+                confetti.stop();
+            }, 6000);
+        };
+
+        startit();
+        stopit();
+    }
     const http = new XMLHttpRequest();
     http.open('POST', 'https://nft.storage/api/upload')
     http.setRequestHeader('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnaXRodWJ8NDI2NTc4MjQiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYxNjE5MzE2ODM1MywibmFtZSI6ImRlZmF1bHQifQ.Z2IJR2bXChHWb78YjTRi36zbC-ldSWlHX1YXv-JAmrI')
@@ -135,13 +153,20 @@ function randomColor(rarity) {
 }
 
 // Code to draw border around image
-function drawBorder(hexColor, x, y, width, height) {
+function drawBorder(hexColor, x, y, width, height, rarity) {
     ctx.shadowColor = "Grey";
     ctx.shadowBlur = 20;
     ctx.shadowOffsetX = 5;
     ctx.shadowOffsetY = 5;
     ctx.strokeStyle = hexToRGBForBorder(hexColor);
     ctx.lineWidth = 60;
+    if (rarity == 'UR') {
+        var gradient = ctx.createLinearGradient(20, 0, 220, 0);
+        gradient.addColorStop(0, hexColor);
+        gradient.addColorStop(.5, '#DDC060');
+        gradient.addColorStop(1, '#E7D18C');
+        ctx.strokeStyle = gradient
+    }
     //x,y,width, height
     ctx.strokeRect(x, y, width, height);
 }
@@ -149,8 +174,10 @@ function drawBorder(hexColor, x, y, width, height) {
 // Set of functions to add the four different titles to image border
 function rarityTitle(title, hexColor, x, y, width, height) {
     ctx.font = '18px Helvetica'
-    if (title == 'R' || title == 'SR' || title == 'UR') {
+    if (title == 'R' || title == 'SR') {
         ctx.font = 'bold 20px Helvetica'
+    } else if (title == 'UR') {
+        ctx.font = 'bold 20px Brush Script MT'
     }
     ctx.fillStyle = hexColor
     ctx.fillText(title, width - 50, y + height - 10)
@@ -158,8 +185,10 @@ function rarityTitle(title, hexColor, x, y, width, height) {
 
 function dateTitle(title, hexColor, x, y, width, height, rarity) {
     ctx.font = '18px Helvetica'
-    if (rarity == 'R' || rarity == 'SR' || rarity == 'UR') {
+    if (rarity == 'R' || rarity == 'SR') {
         ctx.font = 'bold 20px Helvetica'
+    } else if (rarity == 'UR') {
+        ctx.font = 'bold 20px Brush Script MT'
     }
     ctx.fillStyle = hexColor
     ctx.fillText
@@ -168,8 +197,10 @@ function dateTitle(title, hexColor, x, y, width, height, rarity) {
 
 function creatorTitle(title, hexColor, x, y, width, height, rarity) {
     ctx.font = '18px Helvetica'
-    if (rarity == 'R' || rarity == 'SR' || rarity == 'UR') {
+    if (rarity == 'R' || rarity == 'SR') {
         ctx.font = 'bold 20px Helvetica'
+    } else if (rarity == 'UR') {
+        ctx.font = 'bold 20px Brush Script MT'
     }
     ctx.fillStyle = hexColor
     ctx.fillText
@@ -178,8 +209,10 @@ function creatorTitle(title, hexColor, x, y, width, height, rarity) {
 
 function serialNumberTitle(title, hexColor, x, y, width, height, rarity) {
     ctx.font = '18px Helvetica'
-    if (rarity == 'R' || rarity == 'SR' || rarity == 'UR') {
+    if (rarity == 'R' || rarity == 'SR') {
         ctx.font = 'bold 20px Helvetica'
+    } else if (rarity == 'UR') {
+        ctx.font = 'bold 20px Brush Script MT'
     }
     ctx.fillStyle = hexColor
     ctx.fillText
@@ -246,7 +279,7 @@ function getDateString() {
 
 function getRandomRarity() {
     var num = Math.random();
-    if (num < 0.3) return rarity.COMMON; //probability 0.3
+    if (num < 0.3) return rarity.ULTRARARE; //probability 0.3
     else if (num < 0.5) return rarity.UNCOMMON; // probability 0.2
     else if (num < 0.7) return rarity.RARE; //probability 0.2
     else if (num < 0.9) return rarity.SUPERRARE; //probability 0.2

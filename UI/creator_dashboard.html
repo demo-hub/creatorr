@@ -119,19 +119,19 @@
                     <b>Current NFT'S for offering</b>
                     <div class="row">
                         <div class="circle">
-                            <img id="img1" alt="" width="180" height="180" style="display: none;">
+                            <img id="img1_dashboard" alt="" width="180" height="180" style="display: none;">
                             <div id="img1_icon" class="fab second" style="display: none;">
                                 <i class="fas fa-times"></i>
                             </div>
                         </div>
                         <div class="circle">
-                            <img id="img2" alt="" width="180" height="180" style="display: none;">
+                            <img id="img2_dashboard" alt="" width="180" height="180" style="display: none;">
                             <div id="img2_icon" class="fab second" style="display: none;">
                                 <i class="fas fa-times"></i>
                             </div>
                         </div>
                         <div class="circle">
-                            <img id="img3" alt="" width="180" height="180" style="display: none;">
+                            <img id="img3_dashboard" alt="" width="180" height="180" style="display: none;">
                             <div id="img3_icon" class="fab second" style="display: none;">
                                 <i class="fas fa-times"></i>
                             </div>
@@ -216,15 +216,44 @@
                     }))
                 }
 
-                console.log(localStorage.getItem('streamer_images'))
+                reloadImages();
             };
 
             reader.readAsDataURL(document.getElementById("exampleFormControlFile1").files[0]);
         }
 
+        function reloadImages() {
+            const images = localStorage.getItem('streamer_images');
+            if (images) {
+                const img1 = document.getElementById("img1_dashboard");
+                img1.src = JSON.parse(images).array[JSON.parse(images).array.length - 1];
+                if (JSON.parse(images).array[JSON.parse(images).array.length - 1]) {
+                    img1.removeAttribute("style")
+                    const img1_i = document.getElementById("img1_icon");
+                    img1_i.removeAttribute("style")
+                }
+
+                const img2 = document.getElementById("img2_dashboard");
+                img2.src = JSON.parse(images).array[JSON.parse(images).array.length - 2];
+                if (JSON.parse(images).array[JSON.parse(images).array.length - 2]) {
+                    img2.removeAttribute("style")
+                    const img2_i = document.getElementById("img2_icon");
+                    img2_i.removeAttribute("style")
+                }
+
+                const img3 = document.getElementById("img3_dashboard");
+                img3.src = JSON.parse(images).array[JSON.parse(images).array.length - 3];
+                if (JSON.parse(images).array[JSON.parse(images).array.length - 3]) {
+                    img3.removeAttribute("style")
+                    const img3_i = document.getElementById("img3_icon");
+                    img3_i.removeAttribute("style")
+                }
+            }
+        }
+
         const images = localStorage.getItem('streamer_images');
         if (images) {
-            const img1 = document.getElementById("img1");
+            const img1 = document.getElementById("img1_dashboard");
             img1.src = JSON.parse(images).array[JSON.parse(images).array.length - 1];
             if (JSON.parse(images).array[JSON.parse(images).array.length - 1]) {
                 img1.removeAttribute("style")
@@ -232,7 +261,7 @@
                 img1_i.removeAttribute("style")
             }
 
-            const img2 = document.getElementById("img2");
+            const img2 = document.getElementById("img2_dashboard");
             img2.src = JSON.parse(images).array[JSON.parse(images).array.length - 2];
             if (JSON.parse(images).array[JSON.parse(images).array.length - 2]) {
                 img2.removeAttribute("style")
@@ -240,7 +269,7 @@
                 img2_i.removeAttribute("style")
             }
 
-            const img3 = document.getElementById("img3");
+            const img3 = document.getElementById("img3_dashboard");
             img3.src = JSON.parse(images).array[JSON.parse(images).array.length - 3];
             if (JSON.parse(images).array[JSON.parse(images).array.length - 3]) {
                 img3.removeAttribute("style")

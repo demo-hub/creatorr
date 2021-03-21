@@ -17,6 +17,12 @@
 - Run npm run dev;
 - You should see "Listening on port 5000" on the console and if you open the browser on localhost:5000 you should see "It's working!"
 
+### NFT Minter
+- Go to the creatorrminter folder;
+- Run npm i;
+- Run npm run dev;
+- You should see "Listening on port 3001" on the console and if you open the browser on localhost:5000 you should see the minter.
+- Cloned from https://github.com/hack3r-0m/NFTminter
 ### Resources
 
 #### Generate Circle API Key

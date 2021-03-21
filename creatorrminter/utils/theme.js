@@ -1,9 +1,9 @@
 import { red, amber, grey } from "@material-ui/core/colors";
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 
-const fontFamilyRoboto = {
+const fontFamilyPoppins = {
   fontFamily: [
-    "Roboto",
+    "Poppins",
     "Arial",
     "sans-serif",
     '"Apple Color Emoji"',
@@ -14,6 +14,7 @@ const fontFamilyRoboto = {
 
 const fontFamilyMetropolis = {
   fontFamily: [
+    "Poppins",
     "Metropolis",
     "Arial",
     "sans-serif",
@@ -39,13 +40,13 @@ const lightMuiTheme = createMuiTheme({
       main: red.A400
     },
     background: {
-      default: "#FFF",
-      highlight: "#F1F3F4"
+      default: "#151515",
+      highlight: "#fff"
     }
   },
   custom: {
     fontFamily: {
-      roboto: fontFamilyRoboto,
+      Poppins: fontFamilyPoppins,
       metropolis: fontFamilyMetropolis
     },
     palette: {
@@ -73,13 +74,13 @@ const darkMuiTheme = createMuiTheme({
       highlight: "#535456"
     },
     text: {
-      primary: "#E8EAED",
+      primary: "#FFFFFF",
       secondary: "#FFFFFFDE"
     }
   },
   custom: {
     fontFamily: {
-      roboto: fontFamilyRoboto,
+      Poppins: fontFamilyPoppins,
       metropolis: fontFamilyMetropolis
     },
     palette: {

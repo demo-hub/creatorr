@@ -81,10 +81,11 @@ const Index = ({ signerAddress, contract_1155, contract_721, networkId }) => {
 const useStyles = makeStyles((theme) => ({
   main: {
     width: '100%',
-    margin: '0px auto',
+    margin: '20px auto',
     marginBottom: 20,
     maxWidth: 1100,
     textAlign: 'center',
+    color: '#fff',
     [theme.breakpoints.down('xs')]: {
       marginTop: '20px'
     },

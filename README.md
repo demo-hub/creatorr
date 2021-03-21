@@ -4,7 +4,7 @@
 
 [Youtube](https://www.youtube.com/watch?v=6JNUpGN_XpM)
 
-## You might have seen us at the NFTHack 2021...
+## You might have seen us at NFTHack 2021...
 
 ![alt text](https://github.com/demo-hub/creatorr/blob/main/photo_2021-03-21_21-27-33.jpg "Prize winners")
 

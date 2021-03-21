@@ -32,8 +32,9 @@
                         <div class="submenu">
                             <ul>
                                 <li>
-                                    <a href="profile.html">
-                                        <i class="fas fa-user-circle"></i> My profile
+                                    <a href="my_profile.html">
+                                        <i class="fas fa-user-circle"></i>
+                                        My profile
                                     </a>
                                 </li>
                                 <li>
@@ -160,7 +161,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">Make payment</button>
+                            <button type="button" class="btn btn-primary" onclick="exportImage()" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">Make payment</button>
                         </div>
                     </div>
                 </div>
@@ -192,13 +193,13 @@
                     <b>Their NFT'S up for for offering</b>
                     <div class="row">
                         <div class="circle">
-                            <img src="img/nft1.png" alt="" width="180">
+                            <img src="img/nft1.jpg" alt="" width="180">
                         </div>
                         <div class="circle">
-                            <img src="img/nft2.png" alt="" width="180">
+                            <img src="img/nft2.jpg" alt="" width="180">
                         </div>
                         <div class="circle">
-                            <img src="img/nft3.png" alt="" width="180">
+                            <img src="img/nft3.jpg" alt="" width="180">
                         </div>
                     </div>
                 </div>
@@ -241,6 +242,7 @@
             </div>
         </div>
     </footer>
+    <script src="confetti.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script>
       function loadName() {
@@ -299,3 +301,4 @@
         }
     }
 </script> -->
+</html>

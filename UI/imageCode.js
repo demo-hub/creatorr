@@ -1,13 +1,23 @@
 var canvas, ctx;
 let dataURL = '';
 let ipfsHash = '';
+let creatorr;
+
+// Enums for rarity types
+const rarity = {
+    COMMON: "C",
+    UNCOMMON: "U",
+    RARE: "R",
+    SUPERRARE: "SR",
+    ULTRARARE: "UR"
+};
 
 const borderColor = {
-    COMMON: "#000000",
-    UNCOMMON: "#ff0000",
-    RARE: "#00ff00",
-    SUPERRARE: "#0000ff",
-    ULTRARARE: "#ffffff"
+    C: "#DBDBDB",
+    U: "#03AC13",
+    R: "#63C5DA",
+    SR: "#B65FCF",
+    UR: "#D4AF37"
 }
 
 function CreatorrInfo(x, y, width, height, imageURL, cardRarityTitle, creatorText, date, borderColor, textColor, serialNumber) {
@@ -26,15 +36,6 @@ function CreatorrInfo(x, y, width, height, imageURL, cardRarityTitle, creatorTex
 
 function init() {
 
-    // Enums for rarity types
-    const rarity = {
-        COMMON: "COMMON",
-        UNCOMMON: "UNCOMMON",
-        RARE: "RARE",
-        SUPERRARE: "SUPER RARE",
-        ULTRARARE: "ULTRA RARE"
-    };
-
     // Throwaway code to display in HTML
     canvas = document.getElementById('myCanvas');
     ctx = canvas.getContext('2d');
@@ -50,20 +51,21 @@ function init() {
     creatorrInfo.imageURL = "https://i.ibb.co/ZVFrj7V/Image-Doggo-1.jpg";
 
     // adjust rarity based on some randomness
-    creatorrInfo.cardRarityTitle = rarity.RARE
-        // should be passed in as two components, first the collection then the creator
-    creatorrInfo.creatorText = "Founder's Edition by: d0gg0"
+    creatorrInfo.cardRarityTitle = getRandomRarity();
+    // should be passed in as two components, first the collection then the creator
+    creatorrInfo.creatorText = "Mr Beast Founder's Edition"
 
     // hardcoded format and to now
     creatorrInfo.date = getDateString()
 
     // this randomness could/should come from another source
-    let borderColor = randomColor()
+    let borderColor = randomColor(creatorrInfo.cardRarityTitle)
     creatorrInfo.borderColor = borderColor
     creatorrInfo.textColor = idealTextColor(borderColor)
 
     // Serial number should come from the version of the card in the collection? Assuming unique copies
-    creatorrInfo.serialNumber = "0000001"
+    creatorrInfo.serialNumber = makeId(7)
+    creatorr = creatorrInfo;
     addImage(ctx, creatorrInfo)
 }
 
@@ -72,17 +74,15 @@ function addImage(ctx, creatorrInfo) {
     image.crossOrigin = "*";
     image.onload = function() {
         ctx.drawImage(image, creatorrInfo.x, creatorrInfo.y, creatorrInfo.width, creatorrInfo.height);
-        drawBorder(creatorrInfo.borderColor, creatorrInfo.x, creatorrInfo.y, creatorrInfo.width, creatorrInfo.height);
-        rarityTitle(creatorrInfo.cardRarityTitle, creatorrInfo.textColor, creatorrInfo.x, creatorrInfo.y, creatorrInfo.width, creatorrInfo.height);
-        dateTitle(creatorrInfo.date, creatorrInfo.textColor, creatorrInfo.x, creatorrInfo.y, creatorrInfo.width, creatorrInfo.height);
-        creatorTitle(creatorrInfo.creatorText, creatorrInfo.textColor, creatorrInfo.x, creatorrInfo.y, creatorrInfo.width, creatorrInfo.height);
-        serialNumberTitle(creatorrInfo.serialNumber, creatorrInfo.textColor, creatorrInfo.x, creatorrInfo.y, creatorrInfo.width, creatorrInfo.height);
+        drawBorder(creatorrInfo.borderColor, creatorrInfo.x, creatorrInfo.y, creatorrInfo.width, creatorrInfo.height, creatorrInfo.cardRarityTitle);
+        rarityTitle(creatorrInfo.cardRarityTitle, creatorrInfo.textColor, creatorrInfo.x, creatorrInfo.y, creatorrInfo.width, creatorrInfo.height, creatorrInfo.cardRarityTitle);
+        dateTitle(creatorrInfo.date, creatorrInfo.textColor, creatorrInfo.x, creatorrInfo.y, creatorrInfo.width, creatorrInfo.height, creatorrInfo.cardRarityTitle);
+        creatorTitle(creatorrInfo.creatorText, creatorrInfo.textColor, creatorrInfo.x, creatorrInfo.y, creatorrInfo.width, creatorrInfo.height, creatorrInfo.cardRarityTitle);
+        serialNumberTitle(creatorrInfo.serialNumber, creatorrInfo.textColor, creatorrInfo.x, creatorrInfo.y, creatorrInfo.width, creatorrInfo.height, creatorrInfo.cardRarityTitle);
 
         dataURL = canvas.toDataURL(); // png is the default format
 
         dataURL = dataURL.replace(/^data:image\/(png|jpeg);base64,/, "");
-
-        exportImage();
 
         /* const img = new Image();
 
@@ -95,6 +95,24 @@ function addImage(ctx, creatorrInfo) {
 }
 
 function exportImage() {
+    if (creatorr.cardRarityTitle == 'UR') {
+        const startit = () => {
+            setTimeout(function() {
+                console.log("start");
+                confetti.start();
+            }, 1000);
+        };
+
+        const stopit = () => {
+            setTimeout(function() {
+                console.log("stop");
+                confetti.stop();
+            }, 6000);
+        };
+
+        startit();
+        stopit();
+    }
     const http = new XMLHttpRequest();
     http.open('POST', 'https://nft.storage/api/upload')
     http.setRequestHeader('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnaXRodWJ8NDI2NTc4MjQiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYxNjE5MzE2ODM1MywibmFtZSI6ImRlZmF1bHQifQ.Z2IJR2bXChHWb78YjTRi36zbC-ldSWlHX1YXv-JAmrI')
@@ -129,46 +147,73 @@ function exportImage() {
 
 // Random Color Generator
 // Should be imported from another source
-function randomColor() {
-    return "#" + Math.floor(Math.random() * 16777215).toString(16);
+function randomColor(rarity) {
+    return borderColor[rarity];
+    // return "#" + Math.floor(Math.random() * 16777215).toString(16);
 }
 
 // Code to draw border around image
-function drawBorder(hexColor, x, y, width, height) {
+function drawBorder(hexColor, x, y, width, height, rarity) {
     ctx.shadowColor = "Grey";
     ctx.shadowBlur = 20;
     ctx.shadowOffsetX = 5;
     ctx.shadowOffsetY = 5;
     ctx.strokeStyle = hexToRGBForBorder(hexColor);
     ctx.lineWidth = 60;
+    if (rarity == 'UR') {
+        var gradient = ctx.createLinearGradient(20, 0, 220, 0);
+        gradient.addColorStop(0, hexColor);
+        gradient.addColorStop(.5, '#DDC060');
+        gradient.addColorStop(1, '#E7D18C');
+        ctx.strokeStyle = gradient
+    }
     //x,y,width, height
     ctx.strokeRect(x, y, width, height);
 }
 
 // Set of functions to add the four different titles to image border
 function rarityTitle(title, hexColor, x, y, width, height) {
-    ctx.font = '20px Helvetica'
+    ctx.font = '18px Helvetica'
+    if (title == 'R' || title == 'SR') {
+        ctx.font = 'bold 20px Helvetica'
+    } else if (title == 'UR') {
+        ctx.font = 'bold 20px Brush Script MT'
+    }
     ctx.fillStyle = hexColor
-    ctx.fillText
-    ctx.fillText(title, width - 100, y + height - 10)
+    ctx.fillText(title, width - 50, y + height - 10)
 }
 
-function dateTitle(title, hexColor, x, y, width, height) {
-    ctx.font = '20px Helvetica'
+function dateTitle(title, hexColor, x, y, width, height, rarity) {
+    ctx.font = '18px Helvetica'
+    if (rarity == 'R' || rarity == 'SR') {
+        ctx.font = 'bold 20px Helvetica'
+    } else if (rarity == 'UR') {
+        ctx.font = 'bold 20px Brush Script MT'
+    }
     ctx.fillStyle = hexColor
     ctx.fillText
     ctx.fillText(title, 10, y + height - 10)
 }
 
-function creatorTitle(title, hexColor, x, y, width, height) {
-    ctx.font = '20px Helvetica'
+function creatorTitle(title, hexColor, x, y, width, height, rarity) {
+    ctx.font = '18px Helvetica'
+    if (rarity == 'R' || rarity == 'SR') {
+        ctx.font = 'bold 20px Helvetica'
+    } else if (rarity == 'UR') {
+        ctx.font = 'bold 20px Brush Script MT'
+    }
     ctx.fillStyle = hexColor
     ctx.fillText
     ctx.fillText(title, 10, 20)
 }
 
-function serialNumberTitle(title, hexColor, x, y, width, height) {
-    ctx.font = '20px Helvetica'
+function serialNumberTitle(title, hexColor, x, y, width, height, rarity) {
+    ctx.font = '18px Helvetica'
+    if (rarity == 'R' || rarity == 'SR') {
+        ctx.font = 'bold 20px Helvetica'
+    } else if (rarity == 'UR') {
+        ctx.font = 'bold 20px Brush Script MT'
+    }
     ctx.fillStyle = hexColor
     ctx.fillText
     ctx.fillText(title, width - 100, 20)
@@ -230,4 +275,23 @@ function getDateString() {
     const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
     const day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
     return month + " " + day + " " + year
+}
+
+function getRandomRarity() {
+    var num = Math.random();
+    if (num < 0.3) return rarity.ULTRARARE; //probability 0.3
+    else if (num < 0.5) return rarity.UNCOMMON; // probability 0.2
+    else if (num < 0.7) return rarity.RARE; //probability 0.2
+    else if (num < 0.9) return rarity.SUPERRARE; //probability 0.2
+    return rarity.ULTRARARE; //probability 0.1
+}
+
+function makeId(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
 }

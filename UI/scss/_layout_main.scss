@@ -29,6 +29,9 @@ main {
 				font-weight: 900;
 			}
 			input {
+				font-family: "Poppins", sans-serif;
+				font-size: $primaryFontSize;
+				line-height: inherit;
 				width: 100%;
 				padding: $spacingRegular*2;
 				border-radius: $spacingRegular*4;
@@ -71,7 +74,7 @@ main {
 						@include flex-element;
 						width: 66.6%;
 						b {
-
+							color: $primaryDark;
 						}
 						p {
 							font-size: $primaryFontSizeSmall;
@@ -146,6 +149,7 @@ main {
                     &:hover {
                         border: 2px solid $primaryDark;
                         background: rgb(111,0,193);
+						color: $primaryLight;
                         background: linear-gradient(306deg, rgba(111,0,193,1) 0%, rgba(72,0,211,1) 100%);
                     }
                 }
@@ -234,8 +238,10 @@ main {
 				background: linear-gradient(223deg, rgba(72,0,211,1) 0%, rgba(111,0,193,1) 100%);
 				text-transform: uppercase;
 				letter-spacing: 2px;
+				cursor: pointer;
 				&:hover {
 					background: rgb(111,0,193);
+					color: $primaryLight;
 					background: linear-gradient(306deg, rgba(111,0,193,1) 0%, rgba(72,0,211,1) 100%);
 				}
 			}

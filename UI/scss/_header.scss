@@ -140,11 +140,16 @@ header {
                 max-width: 400px;
                 padding: $spacingRegular*1.5 $spacingRegular*9.5 $spacingRegular;
                 margin-left: auto;
+                box-sizing: content-box;
+                * {
+                    box-sizing: content-box;
+                }
                 .search_box	{
                     @include flex-element;
                     width: calc(66.6% - #{$spacingRegular});
                     position: relative;
                     padding-right: $spacingRegular;
+                    box-sizing: inherit;
                     &:after {
                         position: absolute;
                         content: "\f002";

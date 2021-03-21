@@ -33,7 +33,7 @@
                         <div class="submenu">
                             <ul>
                                 <li>
-                                    <a href="profile.html">
+                                    <a href="my_profile.html">
                                         <i class="fas fa-user-circle"></i> My profile
                                     </a>
                                 </li>
@@ -192,7 +192,16 @@
                 <div class="left">
                     <b>Their NFT'S up for for offering</b>
                     <div id="profile_cards" class="row">
-
+                    <div class="row">
+                        <div class="circle">
+                            <img id="img1" alt="" width="180">
+                        </div>
+                        <div class="circle">
+                            <img id="img2" alt="" width="180">
+                        </div>
+                        <div class="circle">
+                            <img id="img3" alt="" width="180">
+                        </div>
                     </div>
                 </div>
                 <div class="right">
@@ -268,8 +277,19 @@
         }
         return dict;
       }
-    </script>
 
+        const images = localStorage.getItem('streamer_images');
+        if (images) {
+            const img1 = document.getElementById("img1");
+            img1.src = JSON.parse(images).array[JSON.parse(images).array.length - 1];
+
+            const img2 = document.getElementById("img2");
+            img2.src = JSON.parse(images).array[JSON.parse(images).array.length - 2];
+
+            const img3 = document.getElementById("img3");
+            img3.src = JSON.parse(images).array[JSON.parse(images).array.length - 3];
+        }
+    </script>
 </body>
 
 </html>

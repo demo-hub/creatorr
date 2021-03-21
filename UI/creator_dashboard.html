@@ -31,20 +31,17 @@
                             <ul>
                                 <li>
                                     <a href="my_profile.html">
-                                        <i class="fas fa-user-circle"></i>
-                                        My profile
+                                        <i class="fas fa-user-circle"></i> My profile
                                     </a>
                                 </li>
                                 <li>
                                     <a href="my_wallet.html">
-                                        <i class="fas fa-wallet"></i>
-                                        My NFT Wallet
+                                        <i class="fas fa-wallet"></i> My NFT Wallet
                                     </a>
                                 </li>
                                 <li>
                                     <a href="creator_dashboard.html">
-                                        <i class="fas fa-cogs"></i>
-                                        Settings
+                                        <i class="fas fa-cogs"></i> Settings
                                     </a>
                                 </li>
                                 <li>
@@ -122,20 +119,20 @@
                     <b>Current NFT'S for offering</b>
                     <div class="row">
                         <div class="circle">
-                            <img src="img/nft1.jpg" alt="" width="180">
-                            <div class="fab second">
+                            <img id="img1" alt="" width="180" height="180" style="display: none;">
+                            <div id="img1_icon" class="fab second" style="display: none;">
                                 <i class="fas fa-times"></i>
                             </div>
                         </div>
                         <div class="circle">
-                            <img src="img/nft2.jpg" alt="" width="180">
-                            <div class="fab second">
+                            <img id="img2" alt="" width="180" height="180" style="display: none;">
+                            <div id="img2_icon" class="fab second" style="display: none;">
                                 <i class="fas fa-times"></i>
                             </div>
                         </div>
                         <div class="circle">
-                            <img src="img/nft3.jpg" alt="" width="180">
-                            <div class="fab second">
+                            <img id="img3" alt="" width="180" height="180" style="display: none;">
+                            <div id="img3_icon" class="fab second" style="display: none;">
                                 <i class="fas fa-times"></i>
                             </div>
                         </div>
@@ -152,9 +149,10 @@
                     </div>
                     <div class="row">
                         <div class="circle">
-                            <a href="#">
+                            <a onclick="uploadFile()">
                                 <img src="img/upload.png" alt="" width="180">
                             </a>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1" accept="image/png, image/jpeg" onchange="onInputChange(event)" hidden>
                         </div>
                     </div>
                 </div>
@@ -194,6 +192,63 @@
             </div>
         </div>
     </footer>
+    <script>
+        function uploadFile() {
+            document.getElementById("exampleFormControlFile1").click();
+        }
+
+        function onInputChange(event) {
+            console.log(document.getElementById("exampleFormControlFile1").files)
+
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                let images = localStorage.getItem('streamer_images');
+
+                if (images) {
+                    let jsonImages = JSON.parse(images);
+                    jsonImages.array.push(e.target.result);
+                    localStorage.removeItem("streamer_images");
+                    localStorage.setItem('streamer_images', JSON.stringify(jsonImages))
+                } else {
+                    localStorage.setItem('streamer_images', JSON.stringify({
+                        array: [e.target.result]
+                    }))
+                }
+
+                console.log(localStorage.getItem('streamer_images'))
+            };
+
+            reader.readAsDataURL(document.getElementById("exampleFormControlFile1").files[0]);
+        }
+
+        const images = localStorage.getItem('streamer_images');
+        if (images) {
+            const img1 = document.getElementById("img1");
+            img1.src = JSON.parse(images).array[JSON.parse(images).array.length - 1];
+            if (JSON.parse(images).array[JSON.parse(images).array.length - 1]) {
+                img1.removeAttribute("style")
+                const img1_i = document.getElementById("img1_icon");
+                img1_i.removeAttribute("style")
+            }
+
+            const img2 = document.getElementById("img2");
+            img2.src = JSON.parse(images).array[JSON.parse(images).array.length - 2];
+            if (JSON.parse(images).array[JSON.parse(images).array.length - 2]) {
+                img2.removeAttribute("style")
+                const img2_i = document.getElementById("img2_icon");
+                img2_i.removeAttribute("style")
+            }
+
+            const img3 = document.getElementById("img3");
+            img3.src = JSON.parse(images).array[JSON.parse(images).array.length - 3];
+            if (JSON.parse(images).array[JSON.parse(images).array.length - 3]) {
+                img3.removeAttribute("style")
+                const img3_i = document.getElementById("img3_icon");
+                img3_i.removeAttribute("style")
+            }
+        }
+    </script>
 </body>
 
 </html>

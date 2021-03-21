@@ -33,20 +33,17 @@
                             <ul>
                                 <li>
                                     <a href="my_profile.html">
-                                        <i class="fas fa-user-circle"></i>
-                                        My profile
+                                        <i class="fas fa-user-circle"></i> My profile
                                     </a>
                                 </li>
                                 <li>
                                     <a href="my_wallet.html">
-                                        <i class="fas fa-wallet"></i>
-                                        My NFT Wallet
+                                        <i class="fas fa-wallet"></i> My NFT Wallet
                                     </a>
                                 </li>
                                 <li>
                                     <a href="creator_dashboard.html">
-                                        <i class="fas fa-cogs"></i>
-                                        Settings
+                                        <i class="fas fa-cogs"></i> Settings
                                     </a>
                                 </li>
                                 <li>
@@ -97,13 +94,13 @@
                     <b>My NFT'S</b>
                     <div class="row">
                         <div class="circle">
-                            <img src="img/nft1.jpg" alt="" width="180">
+                            <img id="img1" alt="" width="180">
                         </div>
                         <div class="circle">
-                            <img src="img/nft2.jpg" alt="" width="180">
+                            <img id="img2" alt="" width="180">
                         </div>
                         <div class="circle">
-                            <img src="img/nft3.jpg" alt="" width="180">
+                            <img id="img3" alt="" width="180">
                         </div>
                     </div>
                 </div>
@@ -146,35 +143,20 @@
             </div>
         </div>
     </footer>
+    <script>
+        const images = localStorage.getItem('images');
+        if (images) {
+            const img1 = document.getElementById("img1");
+            img1.src = JSON.parse(images).array[0];
+
+            const img2 = document.getElementById("img2");
+            img2.src = JSON.parse(images).array[1];
+
+            const img3 = document.getElementById("img3");
+            img3.src = JSON.parse(images).array[2];
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 
 </html>
-
-<!-- <script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on the button, open the modal
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script> -->

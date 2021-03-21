@@ -134,10 +134,19 @@ function exportImage() {
     formData.append("file", new File(byteArrays, 'test_1.png'));
     http.onload = function() {
         if (http.readyState == 4 && http.status == "200") {
-            console.log(JSON.parse(http.responseText));
             document.getElementById('imageLink').href = 'https://ipfs.io/ipfs/' + JSON.parse(http.responseText).value.cid + '/test_1.png';
             document.getElementById('imageLink').textContent = 'https://ipfs.io/ipfs/' + JSON.parse(http.responseText).value.cid + '/test_1.png';
-            console.log(document.getElementById('imageLink'))
+            let images = localStorage.getItem('images')
+
+            if (images) {
+                let jsonImages = JSON.parse(images);
+                jsonImages.array.push('https://ipfs.io/ipfs/' + JSON.parse(http.responseText).value.cid + '/test_1.png')
+                localStorage.removeItem('images');
+                localStorage.setItem('images', JSON.stringify(jsonImages));
+                console.log(JSON.stringify(jsonImages))
+            } else {
+                localStorage.setItem('images', JSON.stringify({ array: ['https://ipfs.io/ipfs/' + JSON.parse(http.responseText).value.cid + '/test_1.png'] }))
+            }
         } else {
             console.error("error", http.responseText);
         }
@@ -279,7 +288,7 @@ function getDateString() {
 
 function getRandomRarity() {
     var num = Math.random();
-    if (num < 0.3) return rarity.ULTRARARE; //probability 0.3
+    if (num < 0.3) return rarity.COMMON; //probability 0.3
     else if (num < 0.5) return rarity.UNCOMMON; // probability 0.2
     else if (num < 0.7) return rarity.RARE; //probability 0.2
     else if (num < 0.9) return rarity.SUPERRARE; //probability 0.2

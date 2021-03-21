@@ -13,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
     <script type="text/javascript" src="imageCode.js"></script>
+    <script type="text/javascript" src="profile.js"></script>
 </head>
 
 <body onload="loadName()">
@@ -32,9 +33,8 @@
                         <div class="submenu">
                             <ul>
                                 <li>
-                                    <a href="my_profile.html">
-                                        <i class="fas fa-user-circle"></i>
-                                        My profile
+                                    <a href="profile.html">
+                                        <i class="fas fa-user-circle"></i> My profile
                                     </a>
                                 </li>
                                 <li>
@@ -70,19 +70,19 @@
         <div class="container dashboard_page">
             <div class="left">
                 <div class="profile_wrap">
-                    <img src="img/profile_pic_large.png" alt="" width="165">
+                    <img id="profile_image" src="img/profile_pic_large.png" alt="" width="165">
                 </div>
             </div>
             <div class="center">
                 <h4 id="creator_name">
-                    
+
                 </h4>
                 <p>
-                    <span class="subtext">YouTube</span>
+                    <span id="profile_platform" class="subtext"></span>
                 </p>
                 <div class="divider_fourty"></div>
-                <p>
-                    This is a paragraph explaining how i spend my life, breathing, walking, and cashing like <br> "MR Beast".
+                <p id="creator_bio">
+
                 </p>
                 <a data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="init()">SUPPORT THIS CREATORR</a>
             </div>
@@ -161,7 +161,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="exportImage()" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">Make payment</button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">Make payment</button>
                         </div>
                     </div>
                 </div>
@@ -191,16 +191,8 @@
             <div class="container creator_nft">
                 <div class="left">
                     <b>Their NFT'S up for for offering</b>
-                    <div class="row">
-                        <div class="circle">
-                            <img src="img/nft1.jpg" alt="" width="180">
-                        </div>
-                        <div class="circle">
-                            <img src="img/nft2.jpg" alt="" width="180">
-                        </div>
-                        <div class="circle">
-                            <img src="img/nft3.jpg" alt="" width="180">
-                        </div>
+                    <div id="profile_cards" class="row">
+
                     </div>
                 </div>
                 <div class="right">
@@ -242,13 +234,21 @@
             </div>
         </div>
     </footer>
-    <script src="confetti.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script>
       function loadName() {
-        var profileName =document.getElementById('creator_name');
-        var params = getParams();
-        profileName.innerHTML = params[0].value;
+        let profileName = document.getElementById('creator_name');
+        let profileBio = document.getElementById('creator_bio');
+        let profileImage = document.getElementById('profile_image');
+        let profileCardsDiv = document.getElementById('profile_cards');
+        let profilePlatform = document.getElementById('profile_platform');
+        let params = getParams();
+        let creatorName = params[0].value;
+        profileName.innerHTML = creatorName;
+        profileBio.innerHTML =  getProfileBio(creatorName);
+        profileImage.src = getProfileImage(creatorName);
+        profileCardsDiv.innerHTML = getCardHTML(creatorName);
+        profilePlatform.innerHTML = getProfilePlatform(creatorName);
       };
 
       function getParams() {
@@ -301,4 +301,3 @@
         }
     }
 </script> -->
-</html>

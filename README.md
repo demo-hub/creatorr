@@ -8,6 +8,10 @@
 
 ![alt text](https://github.com/demo-hub/creatorr/blob/main/photo_2021-03-21_21-27-33.jpg "Prize winners")
 
+**1st place** for the **Best payments experience for end-users using Circle's sandbox**
+
+**Winner** for the **Best engagement in NFT Protocol's session**
+
 ## Development
 
 ### Client

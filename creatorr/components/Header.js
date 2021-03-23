@@ -24,7 +24,7 @@ export default function Header() {
             </div>
             <div className="cta_buttons">
                 <div className="left">
-                    <a href="#search_creator">FIND YOUR CREATORR</a>
+                    <a href="#search_creator">FIND YOUR CREATORRR</a>
                 </div>
                 <div className="right">
                     <a href="#">CREATE ACCOUNT</a>

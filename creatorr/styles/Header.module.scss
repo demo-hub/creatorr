@@ -1,0 +1,289 @@
+$primaryColor: #6F00C1;
+$secondaryColor: #4700D3;
+$primaryLight: #ffffff;
+$lightGray: #F5F5F5;
+$darkGray: #555555;
+$primaryDark: #151515;
+$maxWidthLayout: 1200px;
+$headerFontSize: 45px;
+$primaryFontSize: 20px;
+$primaryFontSizeSmall: 16px;
+$spacingRegular: 10px;
+$breakPointTablet: 768px;
+$breakPointDesktop: 1000px;
+@mixin flex-parent($direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: wrap;
+    @content;
+}
+
+@mixin flex-element($grow: 0) {
+    flex-shrink: 0;
+    flex-grow: $grow;
+    flex-basis: auto;
+    @content;
+}
+
+.header {
+    width: 100%;
+    @include flex-parent;
+    overflow: hidden;
+    position: relative;
+    &::after {
+        content: "";
+        width: 80px;
+        height: 80px;
+        background-image: url(../public/img/dots.png);
+        background-size: cover;
+        position: absolute;
+        top: 20%;
+        right: -40px;
+        z-index: 999;
+    }
+    &::before {
+        content: "";
+        width: 80px;
+        height: 80px;
+        background-image: url(../public/img/dots.png);
+        background-size: cover;
+        position: absolute;
+        bottom: 20%;
+        left: -40px;
+        z-index: 999;
+    }
+    .top {
+        width: 100%;
+        @include flex-parent;
+        @include flex-element;
+        background: $primaryDark;
+        .left {
+            @include flex-element;
+            width: 33.3%;
+            a {
+                display: block;
+                padding: $spacingRegular*2;
+            }
+        }
+        .right {
+            @include flex-element;
+            width: 66.6%;
+            background-image: url(../public/img/top_header.png);
+            background-size: contain;
+            background-position: top right;
+            background-repeat: no-repeat;
+            .header_right_content {
+                @include flex-parent;
+                max-width: 400px;
+                padding: $spacingRegular*1.5 $spacingRegular*9.5 $spacingRegular;
+                margin-left: auto;
+                box-sizing: content-box;
+                * {
+                    box-sizing: content-box;
+                }
+                .search_box {
+                    @include flex-element;
+                    width: calc(66.6% - #{$spacingRegular});
+                    position: relative;
+                    padding-right: $spacingRegular;
+                    box-sizing: inherit;
+                    &:after {
+                        position: absolute;
+                        content: "\f002";
+                        top: $spacingRegular*1.6;
+                        left: $spacingRegular*2;
+                        font-family: "Font Awesome 5 Pro";
+                        color: $darkGray;
+                        font-weight: 900;
+                    }
+                    input {
+                        width: calc(100% - #{$spacingRegular*7});
+                        padding: $spacingRegular*1.25 $spacingRegular*2;
+                        border-radius: $spacingRegular*4;
+                        background: $lightGray;
+                        border: 0;
+                        font-size: $primaryFontSize;
+                        padding-left: $spacingRegular*5;
+                        letter-spacing: 1px;
+                    }
+                }
+                .login_button {
+                    @include flex-element;
+                    display: block;
+                    width: calc(33% - #{$spacingRegular*4});
+                    padding: $spacingRegular*1.25 $spacingRegular*2;
+                    border-radius: $spacingRegular * 5;
+                    text-align: center;
+                    color: $primaryLight;
+                    background: $primaryDark;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    &:hover {
+                        background: rgb(111, 0, 193);
+                        background: linear-gradient(306deg, rgba(111, 0, 193, 1) 0%, rgba(72, 0, 211, 1) 100%);
+                    }
+                }
+            }
+        }
+    }
+    .center {
+        width: 100%;
+        @include flex-parent(column);
+        @include flex-element;
+        background: $primaryDark;
+        padding-top: $spacingRegular * 8;
+        padding-bottom: $spacingRegular * 8;
+        .image_wrap {
+            @include flex-element;
+            margin: auto;
+            img {
+                width: 600px;
+                max-width: 100%;
+                padding: 40px;
+            }
+        }
+        .cta_buttons {
+            width: 100%;
+            @include flex-parent();
+            @include flex-element;
+            margin: auto;
+            max-width: 600px;
+            .left {
+                margin-right: $spacingRegular;
+                width: calc(50% - #{$spacingRegular});
+                a {
+                    display: block;
+                    width: calc(100% - #{$spacingRegular*4});
+                    padding: $spacingRegular*1.25 $spacingRegular*2;
+                    border-radius: $spacingRegular * 5;
+                    text-align: center;
+                    color: $primaryLight;
+                    background: rgb(72, 0, 211);
+                    background: linear-gradient(223deg, rgba(72, 0, 211, 1) 0%, rgba(111, 0, 193, 1) 100%);
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    &:hover {
+                        background: rgb(111, 0, 193);
+                        background: linear-gradient(306deg, rgba(111, 0, 193, 1) 0%, rgba(72, 0, 211, 1) 100%);
+                    }
+                }
+            }
+            .right {
+                margin-left: $spacingRegular;
+                width: calc(50% - #{$spacingRegular});
+                a {
+                    display: block;
+                    width: calc(100% - #{$spacingRegular*4});
+                    padding: $spacingRegular*1.25 $spacingRegular*2;
+                    border-radius: $spacingRegular * 5;
+                    text-align: center;
+                    color: $primaryLight;
+                    border: 2px solid $primaryLight;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    &:hover {
+                        border: 2px solid $primaryDark;
+                        background: rgb(111, 0, 193);
+                        background: linear-gradient(306deg, rgba(111, 0, 193, 1) 0%, rgba(72, 0, 211, 1) 100%);
+                    }
+                }
+            }
+        }
+    }
+    .bottom {
+        width: 100%;
+        @include flex-parent;
+        @include flex-element;
+        img {
+            width: 100%;
+        }
+    }
+}
+
+.logged_in {
+    overflow: inherit;
+    .right {
+        .header_right_content {
+            max-width: 500px !important;
+            .search_box {
+                width: calc(50% - #{$spacingRegular}) !important;
+            }
+            .logged_in_profile {
+                @include flex-parent;
+                width: calc(50% - #{$spacingRegular*3});
+                padding: 0 $spacingRegular*1.5 !important;
+                position: relative;
+                .submenu {
+                    display: none;
+                }
+                &:hover {
+                    cursor: pointer;
+                    .submenu {
+                        display: block;
+                        position: absolute;
+                        top: 40px;
+                        right: 0;
+                        z-index: 9999;
+                        -webkit-box-shadow: 2px 6px 6px 0px rgb(0 0 0 / 16%);
+                        -moz-box-shadow: 2px 6px 6px 0px rgba(0, 0, 0, 0.16);
+                        box-shadow: 2px 6px 6px 0px rgb(0 0 0 / 16%);
+                        ul {
+                            width: 100%;
+                            list-style: none;
+                            li {
+                                width: 100%;
+                                a {
+                                    min-width: 200px;
+                                    text-align: left;
+                                    background: $primaryLight;
+                                    display: block;
+                                    padding: $spacingRegular*1.5;
+                                    color: $primaryDark;
+                                    border-bottom: 1px solid $lightGray;
+                                    i {
+                                        color: $primaryDark;
+                                        margin-right: $spacingRegular;
+                                    }
+                                    &:hover {
+                                        background-color: $lightGray;
+                                    }
+                                    &.active {
+                                        background: $primaryColor;
+                                        color: $primaryLight;
+                                        font-weight: 700;
+                                        text-align: center;
+                                        &:hover {
+                                            background: $secondaryColor;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .profile-icon {
+                    @include flex-element;
+                    margin: auto auto auto 0;
+                    img {
+                        max-width: 80%;
+                    }
+                }
+                .name {
+                    @include flex-element;
+                    color: $primaryLight;
+                    margin: auto;
+                    small {
+                        letter-spacing: 1px;
+                        text-transform: uppercase;
+                        font-weight: 300;
+                    }
+                }
+                i {
+                    @include flex-element;
+                    color: $primaryLight;
+                    margin: auto 0 auto auto;
+                }
+            }
+        }
+    }
+}

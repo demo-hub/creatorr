@@ -2,10 +2,8 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { signIn, signOut, useSession } from 'next-auth/client'
 
 export default function Home() {
-    const [ session, loading ] = useSession()
 
   return (
     <div className={styles.container}>
@@ -17,15 +15,6 @@ export default function Home() {
         <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet"/>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossOrigin="anonymous" />
       </Head>
-
-      {!session && <>
-        Not signed in <br/>
-        <button onClick={() => signIn()}>Sign in</button>
-      </>}
-      {session && <>
-        Signed in as {session.user.email} <br/>
-        <button onClick={() => signOut()}>Sign out</button>
-      </>}
 
       <Header></Header>
       <main className={styles.main}>
@@ -45,7 +34,7 @@ export default function Home() {
                 <input type="text" placeholder="Search your creator of choice"/>
             </div>
             <div className="search_results">
-                <div className="card" onclick="window.location.href='profile.html?creator_name=Rosalie'">
+                <div className="card">
                     <div className="top">
                         <div className="left">
                             <img src="img/profile_pic_rosa.png" alt=""/>
@@ -69,7 +58,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="card" onclick="window.location.href='profile.html?creator_name=Andrew'">
+                <div className="card">
                     <div className="top">
                         <div className="left">
                             <img src="img/profile_pic_andrew.png" alt=""/>
@@ -90,7 +79,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="card" onclick="window.location.href='profile.html?creator_name=Joao'">
+                <div className="card">
                     <div className="top">
                         <div className="left">
                             <img src="img/profile_pic.png" alt=""/>
@@ -117,7 +106,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="card" onclick="window.location.href='profile.html?creator_name=Jurjen'">
+                <div className="card">
                     <div className="top">
                         <div className="left">
                             <img src="img/profile_pic_jur.png" alt=""/>

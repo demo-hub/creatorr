@@ -5,18 +5,18 @@ export default NextAuth({
     // Configure one or more authentication providers
     providers: [
         Providers.Twitch({
-            clientId: process.env.TWITCH_CLIENT_ID,
-            clientSecret: process.env.TWITCH_CLIENT_SECRET
+            clientId: process.env.NEXT_PUBLIC_TWITCH_CLIENT_ID,
+            clientSecret: process.env.NEXT_PUBLIC_TWITCH_CLIENT_SECRET
         }),
         Providers.Google({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET
+            clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+            clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET
         })
         // ...add more providers here
     ],
 
     // A database is optional, but required to persist accounts in a database
-    database: process.env.DATABASE_URL,
+    database: process.env.NEXT_PUBLIC_DATABASE_URL,
 
     // Custom pages
     pages: {

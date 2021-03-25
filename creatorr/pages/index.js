@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 export default function Home() {
+
   return (
     <div className={styles.container}>
       <Head>
@@ -33,7 +34,7 @@ export default function Home() {
                 <input type="text" placeholder="Search your creator of choice"/>
             </div>
             <div className="search_results">
-                <div className="card" onclick="window.location.href='profile.html?creator_name=Rosalie'">
+                <div className="card">
                     <div className="top">
                         <div className="left">
                             <img src="img/profile_pic_rosa.png" alt=""/>
@@ -57,7 +58,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="card" onclick="window.location.href='profile.html?creator_name=Andrew'">
+                <div className="card">
                     <div className="top">
                         <div className="left">
                             <img src="img/profile_pic_andrew.png" alt=""/>
@@ -78,7 +79,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="card" onclick="window.location.href='profile.html?creator_name=Joao'">
+                <div className="card">
                     <div className="top">
                         <div className="left">
                             <img src="img/profile_pic.png" alt=""/>
@@ -105,7 +106,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div className="card" onclick="window.location.href='profile.html?creator_name=Jurjen'">
+                <div className="card">
                     <div className="top">
                         <div className="left">
                             <img src="img/profile_pic_jur.png" alt=""/>

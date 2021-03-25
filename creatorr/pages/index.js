@@ -2,8 +2,11 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import { signIn, signOut, useSession } from 'next-auth/client'
 
 export default function Home() {
+    const [ session, loading ] = useSession()
+
   return (
     <div className={styles.container}>
       <Head>
@@ -14,6 +17,15 @@ export default function Home() {
         <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet"/>
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossOrigin="anonymous" />
       </Head>
+
+      {!session && <>
+        Not signed in <br/>
+        <button onClick={() => signIn()}>Sign in</button>
+      </>}
+      {session && <>
+        Signed in as {session.user.email} <br/>
+        <button onClick={() => signOut()}>Sign out</button>
+      </>}
 
       <Header></Header>
       <main className={styles.main}>

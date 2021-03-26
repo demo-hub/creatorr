@@ -27,7 +27,7 @@ export default function Settings() {
                         </div>
                     </div>
                     <div className="center">
-                        <h4>Tom <span className="edit_this"><i className="fas fa-pencil-alt"></i></span></h4>
+                        <h4>{session ? session.user.name : ''} <span className="edit_this"><i className="fas fa-pencil-alt"></i></span></h4>
                         <p><span className="edit_this"><i className="fas fa-pencil-alt"></i></span>
                             <span className="subtext">Twitch streamer</span>
                         </p>

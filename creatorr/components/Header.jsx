@@ -47,9 +47,7 @@ export default function Header() {
                                 </span>
                                 <i className="fas fa-chevron-down"></i>
                             </div>
-                            {/* <a className="login_button" onClick={() => signOut()}>Sign out</a> */}
                         </>}
-                        {/* <a href="creator_dashboard.html" className="login_button">Login</a> */}
                     </div>
                 </div>
             </div>

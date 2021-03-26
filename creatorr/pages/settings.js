@@ -9,7 +9,7 @@ export default function Settings() {
   return (
     <div>
           <Head>
-            <meta charset="UTF-8"/>
+            <meta charSet="UTF-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <link rel="stylesheet" href="css/main.css"/>
             <title>Creatorr | Creatorr dashboard</title>
@@ -96,8 +96,35 @@ export default function Settings() {
                                         var reader = new FileReader();
 
                                         reader.onload = function(e) {
-                                            // connect with the api and save image on ipfs
-                                            setImages(images => [...images, e.target.result])
+                                            // connect with the nft.storage api and save image on ipfs
+                                            const http = new XMLHttpRequest();
+                                            http.open('POST', 'https://nft.storage/api/upload')
+                                            http.setRequestHeader('Authorization', `Bearer ${process.env.NEXT_PUBLIC_NFT_STORAGE_API_KEY}`)
+                                            var formData = new FormData();
+                                            const dataURL = e.target.result.replace(/^data:image\/(png|jpeg);base64,/, "");
+                                            const byteCharacters = atob(dataURL);
+                                            const byteArrays = [];
+
+                                            for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+                                                const slice = byteCharacters.slice(offset, offset + 512);
+
+                                                const byteNumbers = new Array(slice.length);
+                                                for (let i = 0; i < slice.length; i++) {
+                                                    byteNumbers[i] = slice.charCodeAt(i);
+                                                }
+
+                                                const byteArray = new Uint8Array(byteNumbers);
+                                                byteArrays.push(byteArray);
+                                            }
+                                            formData.append("file", new File(byteArrays, 'upload.png'));
+                                            http.onload = function() {
+                                                if (http.readyState == 4 && http.status == "200") {
+                                                    setImages(images => [...images, 'https://ipfs.io/ipfs/' + JSON.parse(http.responseText).value.cid + '/upload.png'])
+                                                } else {
+                                                    console.error("error", http.responseText);
+                                                }
+                                            }
+                                            http.send(formData);
                                         };
 
                                         reader.readAsDataURL(document.getElementById("fileInput").files[0]);

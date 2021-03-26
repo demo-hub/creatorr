@@ -40,7 +40,7 @@ export default function Header() {
                                     </ul>
                                 </div>
                                 <div className="profile-icon">
-                                    <img src={session.user.image} alt="" width="56"/>
+                                    <img className="round-image" src={session.user.image} alt="" width="56"/>
                                 </div>
                                 <span className="name">
                                     <b>{session.user.name}</b>

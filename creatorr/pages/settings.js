@@ -24,18 +24,18 @@ export default function Settings() {
             <div className="container dashboard_page">
                     <div className="left">
                         <div className="profile_wrap">
-                            <img src="img/im_doggo.png" alt="" width="165"/>
+                            <img className="round-image" src={session ? session.user.image : ''} alt="" width="165"/>
                             <span className="edit_this"><i className="fas fa-pencil-alt"></i></span>
                         </div>
                     </div>
                     <div className="center">
                         <h4>{session ? session.user.name : ''} <span className="edit_this"><i className="fas fa-pencil-alt"></i></span></h4>
                         <p><span className="edit_this"><i className="fas fa-pencil-alt"></i></span>
-                            <span className="subtext">Twitch streamer</span>
+                            <span className="subtext">{session ? (session.shortDesc ? session.shortDesc : 'Short description') : 'Short description'}</span>
                         </p>
                         <div className="divider_fourty"></div>
                         <p>
-                            Creatorr is a platform on the blockchain which helps creators such as YouTubers Streamers and Artists receive financial support from their fans. Their fans in return earn unique dynamic NFT tokens from their favorite content creator.
+                        {session ? (session.longDesc ? session.longDesc : 'Long description') : 'Long description'}
                             <span className="edit_this"><i className="fas fa-pencil-alt"></i></span>
                         </p>
                     </div>
@@ -44,7 +44,7 @@ export default function Settings() {
                             <b>
                                 I EARNED
                             </b>
-                            <h4>"$1240.44"</h4>
+                            <h4>{session ? (session.monthlyEarnings ? '$' + session.monthlyEarnings : '$0') : '$0'}</h4>
                             <b>
                                 THIS MONTH
                             </b>

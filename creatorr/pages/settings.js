@@ -1,9 +1,11 @@
 import Header from "../components/Header"
 import Head from 'next/head'
-import { signIn, signOut, useSession } from 'next-auth/client'
+import { useState } from 'react'
+import { useSession } from 'next-auth/client'
 
 export default function Settings() {
     const [ session, loading ] = useSession()
+    const [images, setImages] = useState([]) // the initial list should come from the database
   return (
     <div>
           <Head>
@@ -15,7 +17,7 @@ export default function Settings() {
             <link rel="icon" type="image/png" href="img/favicon.png" />
             <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"/>
             <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet"/>
-            <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+            <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossOrigin="anonymous" />
         </Head>
           <Header></Header>
           <main>
@@ -51,8 +53,8 @@ export default function Settings() {
                             <b>Payout option</b>
                             <div className="input_wrap">
                                 <select name="" id="">
-                                    <option value="eth" selected>ETH WALLET</option>
-                                    <option value="wire">WIRE PAYMENT</option>
+                                    <option key="eth">ETH WALLET</option>
+                                    <option key="wire">WIRE PAYMENT</option>
                                 </select>
                             </div>
                             <div className="details_wrap">
@@ -66,24 +68,12 @@ export default function Settings() {
                         <div className="left">
                             <b>Current NFT'S for offering</b>
                             <div className="row">
-                                <div className="circle">
-                                    <img id="img1_dashboard" alt="" width="180" height="180"/>
-                                    <div id="img1_icon" className="fab second">
+                                {images.map(imgSrc=><div key="img" className="circle">
+                                    <img src={imgSrc} alt="" width="180" height="180"/>
+                                    <div className="fab second">
                                         <i className="fas fa-times"></i>
                                     </div>
-                                </div>
-                                <div className="circle">
-                                    <img id="img2_dashboard" alt="" width="180" height="180"/>
-                                    <div id="img2_icon" className="fab second">
-                                        <i className="fas fa-times"></i>
-                                    </div>
-                                </div>
-                                <div className="circle">
-                                    <img id="img3_dashboard" alt="" width="180" height="180" />
-                                    <div id="img3_icon" className="fab second" >
-                                        <i className="fas fa-times"></i>
-                                    </div>
-                                </div>
+                                </div>)}
                             </div>
                         </div>
                         <div className="right">
@@ -97,11 +87,20 @@ export default function Settings() {
                             </div> */}
                             <div className="row">
                                 <div className="circle">
-                                    <a onclick="uploadFile()">
+                                    <a onClick={async (e) => {
+                                        document.getElementById('fileInput').click();
+                                    }}>
                                         <img src="img/upload.png" alt="" width="180"/>
                                     </a>
-                                    <input type="file" className="form-control-file" id="exampleFormControlFile1" accept="image/png, image/jpeg" onChange={async (e) => {
-                                        console.log(e);
+                                    <input type="file" className="form-control-file" id="fileInput" accept="image/png, image/jpeg" onChange={event => {
+                                        var reader = new FileReader();
+
+                                        reader.onload = function(e) {
+                                            // connect with the api and save image on ipfs
+                                            setImages(images => [...images, e.target.result])
+                                        };
+
+                                        reader.readAsDataURL(document.getElementById("fileInput").files[0]);
                                     }} hidden/>
                                 </div>
                             </div>

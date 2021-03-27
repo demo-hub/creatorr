@@ -6,7 +6,8 @@ import axios from 'axios'
 
 function Settings({ userImages }) {
     const [ session, loading ] = useSession()
-    const [images, setImages] = useState(userImages) // the initial list should come from the database
+    const [images, setImages] = useState(userImages)
+    const [editName, setEditName] = useState(false)
 
   return (
     <div>
@@ -31,7 +32,21 @@ function Settings({ userImages }) {
                         </div>
                     </div>
                     <div className="center">
-                        <h4>{session ? session.user.name : ''} <span className="edit_this"><i className="fas fa-pencil-alt"></i></span></h4>
+                        {!editName ? <h4>{session ? session.user.name : ''} <span className="edit_this" onClick={() => {
+                            setEditName(true);
+                        }}><i className="fas fa-pencil-alt"></i></span></h4> : <><p> <span className="edit_this" onClick={async () => {
+                            const response = await axios.put('/api/profile/update', {
+                                name: document.getElementById('editName').value,
+                                email: session.user.email,
+                                image: session.user.image,
+                                shortDesc: session.shortDesc,
+                                longDesc: session.longDesc,
+                                monthlyEarnings: session.monthlyEarnings,
+                                ethWallet: session.ethWallet
+                            })
+                            session.user.name = document.getElementById('editName').value;
+                            setEditName(false)
+                        }}><i className="fas fa-check"></i></span> <input id="editName" type="text" defaultValue={session ? session.user.name : ''}/></p><div className="divider_fourty"></div></>}
                         <p><span className="edit_this"><i className="fas fa-pencil-alt"></i></span>
                             <span className="subtext">{session ? (session.shortDesc ? session.shortDesc : 'Short description') : 'Short description'}</span>
                         </p>

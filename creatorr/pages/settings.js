@@ -30,7 +30,55 @@ function Settings({ userImages }) {
                     <div className="left">
                         <div className="profile_wrap">
                             <img className="round-image" src={session ? session.user.image : ''} alt="" width="165"/>
-                            <span className="edit_this"><i className="fas fa-pencil-alt"></i></span>
+                            <span className="edit_this" onClick={() => {
+                                document.getElementById('profilePic').click()
+                            }}><i className="fas fa-pencil-alt"></i></span>
+                            <input type="file" className="form-control-file" id="profilePic" accept="image/png, image/jpeg" onChange={event => {
+                                var reader = new FileReader();
+
+                                reader.onload = function(e) {
+                                    // connect with the nft.storage api and save image on ipfs
+                                    const http = new XMLHttpRequest();
+                                    http.open('POST', 'https://nft.storage/api/upload')
+                                    http.setRequestHeader('Authorization', `Bearer ${process.env.NEXT_PUBLIC_NFT_STORAGE_API_KEY}`)
+                                    var formData = new FormData();
+                                    const dataURL = e.target.result.replace(/^data:image\/(png|jpeg);base64,/, "");
+                                    const byteCharacters = atob(dataURL);
+                                    const byteArrays = [];
+
+                                    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+                                        const slice = byteCharacters.slice(offset, offset + 512);
+
+                                        const byteNumbers = new Array(slice.length);
+                                        for (let i = 0; i < slice.length; i++) {
+                                            byteNumbers[i] = slice.charCodeAt(i);
+                                        }
+
+                                        const byteArray = new Uint8Array(byteNumbers);
+                                        byteArrays.push(byteArray);
+                                    }
+                                    formData.append("file", new File(byteArrays, 'profile.png'));
+                                    http.onload = async function() {
+                                        if (http.readyState == 4 && http.status == "200") {
+                                            await updateUserInfo({
+                                                name: session.user.name,
+                                                email: session.user.email,
+                                                image: 'https://ipfs.io/ipfs/' + JSON.parse(http.responseText).value.cid + '/profile.png',
+                                                shortDesc: session.shortDesc,
+                                                longDesc: session.longDesc,
+                                                monthlyEarnings: session.monthlyEarnings,
+                                                ethWallet: session.ethWallet
+                                            });
+                                            session.user.image = 'https://ipfs.io/ipfs/' + JSON.parse(http.responseText).value.cid + '/profile.png';
+                                        } else {
+                                            console.error("error", http.responseText);
+                                        }
+                                    }
+                                    http.send(formData);
+                                };
+
+                                reader.readAsDataURL(document.getElementById("profilePic").files[0]);
+                            }} hidden />
                         </div>
                     </div>
                     <div className="center">

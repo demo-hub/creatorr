@@ -8,6 +8,8 @@ function Settings({ userImages }) {
     const [ session, loading ] = useSession()
     const [images, setImages] = useState(userImages)
     const [editName, setEditName] = useState(false)
+    const [editShortDesc, setEditShortDesc] = useState(false)
+    const [editLongDesc, setEditLongDesc] = useState(false)
 
   return (
     <div>
@@ -35,7 +37,7 @@ function Settings({ userImages }) {
                         {!editName ? <h4>{session ? session.user.name : ''} <span className="edit_this" onClick={() => {
                             setEditName(true);
                         }}><i className="fas fa-pencil-alt"></i></span></h4> : <><p> <span className="edit_this" onClick={async () => {
-                            const response = await axios.put('/api/profile/update', {
+                            await updateUserInfo({
                                 name: document.getElementById('editName').value,
                                 email: session.user.email,
                                 image: session.user.image,
@@ -43,18 +45,46 @@ function Settings({ userImages }) {
                                 longDesc: session.longDesc,
                                 monthlyEarnings: session.monthlyEarnings,
                                 ethWallet: session.ethWallet
-                            })
+                            });
                             session.user.name = document.getElementById('editName').value;
                             setEditName(false)
                         }}><i className="fas fa-check"></i></span> <input id="editName" type="text" defaultValue={session ? session.user.name : ''}/></p><div className="divider_fourty"></div></>}
-                        <p><span className="edit_this"><i className="fas fa-pencil-alt"></i></span>
+                        {!editShortDesc ? <><p><span className="edit_this" onClick={() => {
+                            setEditShortDesc(true);
+                        }}><i className="fas fa-pencil-alt"></i></span>
                             <span className="subtext">{session ? (session.shortDesc ? session.shortDesc : 'Short description') : 'Short description'}</span>
                         </p>
-                        <div className="divider_fourty"></div>
-                        <p>
-                        {session ? (session.longDesc ? session.longDesc : 'Long description') : 'Long description'}
-                            <span className="edit_this"><i className="fas fa-pencil-alt"></i></span>
+                        <div className="divider_fourty"></div></> : <><p> <span className="edit_this" onClick={async () => {
+                            await updateUserInfo({
+                                name: session.user.name,
+                                email: session.user.email,
+                                image: session.user.image,
+                                shortDesc: document.getElementById('editShortDesc').value,
+                                longDesc: session.longDesc,
+                                monthlyEarnings: session.monthlyEarnings,
+                                ethWallet: session.ethWallet
+                            });
+                            session.shortDesc = document.getElementById('editShortDesc').value;
+                            setEditShortDesc(false)
+                        }}><i className="fas fa-check"></i></span> <input id="editShortDesc" type="text" defaultValue={session.shortDesc ? session.shortDesc : 'Short description'}/></p><div className="divider_fourty"></div></>}
+                        {!editLongDesc ? <><p><span className="edit_this" onClick={() => {
+                            setEditLongDesc(true);
+                        }}><i className="fas fa-pencil-alt"></i></span>
+                            <span className="subtext">{session ? (session.longDesc ? session.longDesc : 'Long description') : 'Long description'}</span>
                         </p>
+                        <div className="divider_fourty"></div></> : <><p> <span className="edit_this" onClick={async () => {
+                            await updateUserInfo({
+                                name: session.user.name,
+                                email: session.user.email,
+                                image: session.user.image,
+                                shortDesc: session.shortDesc,
+                                longDesc: document.getElementById('editLongDesc').value,
+                                monthlyEarnings: session.monthlyEarnings,
+                                ethWallet: session.ethWallet
+                            });
+                            session.longDesc = document.getElementById('editLongDesc').value;
+                            setEditLongDesc(false)
+                        }}><i className="fas fa-check"></i></span> <textarea rows="4" id="editLongDesc" type="text" defaultValue={session.longDesc ? session.longDesc : 'Short description'}/></p><div className="divider_fourty"></div></>}
                     </div>
                     <div className="right">
                         <div className="earnings">
@@ -160,7 +190,6 @@ function Settings({ userImages }) {
 
 // This function gets called at build time
 export async function getStaticProps() {
-    // Call an external API endpoint to get posts
     const res = (await axios.get(`${process.env.NEXT_PUBLIC_APP_URL}/api/profile/images`)).data;
     const userImages = res.reduce((a, o) => (a.push('https://ipfs.io/ipfs/' + o.cid + '/upload.png'), a), [])
 
@@ -171,6 +200,12 @@ export async function getStaticProps() {
         userImages,
       },
     }
+  }
+
+export async function updateUserInfo(userInfo) {
+    const response = (await axios.put('/api/profile/update', userInfo)).data
+
+    return response
   }
 
 export default Settings

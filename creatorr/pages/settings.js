@@ -2,10 +2,12 @@ import Header from "../components/Header"
 import Head from 'next/head'
 import { useState } from 'react'
 import { useSession } from 'next-auth/client'
+import axios from 'axios'
 
-export default function Settings() {
+function Settings({ userImages }) {
     const [ session, loading ] = useSession()
-    const [images, setImages] = useState([]) // the initial list should come from the database
+    const [images, setImages] = useState(userImages) // the initial list should come from the database
+
   return (
     <div>
           <Head>
@@ -68,12 +70,12 @@ export default function Settings() {
                         <div className="left">
                             <b>Current NFT'S for offering</b>
                             <div className="row">
-                                {images.map(imgSrc=><div key="img" className="circle">
+                                {images ? images.map(imgSrc=><div key="img" className="circle">
                                     <img src={imgSrc} alt="" width="180" height="180"/>
                                     <div className="fab second">
                                         <i className="fas fa-times"></i>
                                     </div>
-                                </div>)}
+                                </div>) : <></>}
                             </div>
                         </div>
                         <div className="right">
@@ -117,8 +119,10 @@ export default function Settings() {
                                                 byteArrays.push(byteArray);
                                             }
                                             formData.append("file", new File(byteArrays, 'upload.png'));
-                                            http.onload = function() {
+                                            http.onload = async function() {
                                                 if (http.readyState == 4 && http.status == "200") {
+                                                    const res = await axios.post('/api/profile/images', {email: session.user.email, cid: JSON.parse(http.responseText).value.cid});
+
                                                     setImages(images => [...images, 'https://ipfs.io/ipfs/' + JSON.parse(http.responseText).value.cid + '/upload.png'])
                                                 } else {
                                                     console.error("error", http.responseText);
@@ -138,3 +142,20 @@ export default function Settings() {
       </div>
   )
 }
+
+// This function gets called at build time
+export async function getStaticProps() {
+    // Call an external API endpoint to get posts
+    const res = (await axios.get('http://localhost:3000/api/profile/images')).data;
+    const userImages = res.reduce((a, o) => (a.push('https://ipfs.io/ipfs/' + o.cid + '/upload.png'), a), [])
+
+    // By returning { props: { userImages } }, the Settings component
+    // will receive `userImages` as a prop at build time
+    return {
+      props: {
+        userImages,
+      },
+    }
+  }
+
+export default Settings

@@ -146,7 +146,7 @@ function Settings({ userImages }) {
 // This function gets called at build time
 export async function getStaticProps() {
     // Call an external API endpoint to get posts
-    const res = (await axios.get('http://localhost:3000/api/profile/images')).data;
+    const res = (await axios.get(`${process.env.NEXT_PUBLIC_APP_URL}/api/profile/images`)).data;
     const userImages = res.reduce((a, o) => (a.push('https://ipfs.io/ipfs/' + o.cid + '/upload.png'), a), [])
 
     // By returning { props: { userImages } }, the Settings component

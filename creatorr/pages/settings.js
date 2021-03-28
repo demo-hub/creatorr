@@ -133,7 +133,7 @@ function Settings({ userImages }) {
                             });
                             session.longDesc = document.getElementById('editLongDesc').value;
                             setEditLongDesc(false)
-                        }}><i className="fas fa-check"></i></span> <textarea rows="4" id="editLongDesc" type="text" defaultValue={session.longDesc ? session.longDesc : 'Short description'}/></p><div className="divider_fourty"></div></>}
+                        }}><i className="fas fa-check"></i></span> <textarea rows="4" id="editLongDesc" type="text" defaultValue={session.longDesc ? session.longDesc : 'Long description'}/></p><div className="divider_fourty"></div></>}
                     </div>
                     <div className="right">
                         <div className="earnings">

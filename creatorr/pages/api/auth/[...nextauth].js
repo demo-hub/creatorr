@@ -52,6 +52,7 @@ export default NextAuth({
          */
         async session(session, token) {
           // Add property to session, like an access_token from a provider.
+          session.id = token.id
           session.shortDesc = token.shortDesc
           session.longDesc = token.longDesc
           session.monthlyEarnings = token.monthlyEarnings

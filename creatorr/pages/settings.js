@@ -1,8 +1,9 @@
 import Header from "../components/Header"
 import Head from 'next/head'
 import { useState } from 'react'
-import { useSession } from 'next-auth/client'
+import { getSession, useSession } from 'next-auth/client'
 import axios from 'axios'
+import Router from 'next/router'
 
 function Settings({ userImages }) {
     const [ session, loading ] = useSession()
@@ -163,9 +164,12 @@ function Settings({ userImages }) {
                         <div className="left">
                             <b>Current NFT'S for offering</b>
                             <div className="row">
-                                {images ? images.map(imgSrc=><div key="img" className="circle">
+                                {images ? images.map(imgSrc=><div key={imgSrc} className="circle">
                                     <img src={imgSrc} alt="" width="180" height="180"/>
-                                    <div className="fab second">
+                                    <div className="fab second" onClick={async () => {
+                                        await axios.put('/api/profile/images', {cid: imgSrc.split('/')[4]});
+                                        Router.reload();
+                                    }}>
                                         <i className="fas fa-times"></i>
                                     </div>
                                 </div>) : <></>}
@@ -214,7 +218,7 @@ function Settings({ userImages }) {
                                             formData.append("file", new File(byteArrays, 'upload.png'));
                                             http.onload = async function() {
                                                 if (http.readyState == 4 && http.status == "200") {
-                                                    const res = await axios.post('/api/profile/images', {email: session.user.email, cid: JSON.parse(http.responseText).value.cid});
+                                                    const res = await axios.post('/api/profile/images', {id: session.id, cid: JSON.parse(http.responseText).value.cid});
 
                                                     setImages(images => [...images, 'https://ipfs.io/ipfs/' + JSON.parse(http.responseText).value.cid + '/upload.png'])
                                                 } else {
@@ -237,9 +241,10 @@ function Settings({ userImages }) {
 }
 
 // This function gets called at build time
-export async function getStaticProps() {
-    const res = (await axios.get(`${process.env.NEXT_PUBLIC_APP_URL}/api/profile/images`)).data;
-    const userImages = res.reduce((a, o) => (a.push('https://ipfs.io/ipfs/' + o.cid + '/upload.png'), a), [])
+export async function getServerSideProps({ req, res }) {
+    const session = await getSession({ req })
+    const response = (await axios.patch(`${process.env.NEXT_PUBLIC_APP_URL}/api/profile/images`, { id: session.id })).data;
+    const userImages = response.reduce((a, o) => (a.push('https://ipfs.io/ipfs/' + o.cid + '/upload.png'), a), [])
 
     // By returning { props: { userImages } }, the Settings component
     // will receive `userImages` as a prop at build time

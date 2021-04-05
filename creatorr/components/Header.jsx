@@ -25,7 +25,7 @@ export default function Header() {
                                 <div className="submenu">
                                     <ul>
                                         <li>
-                                            <a href="my_profile.html">
+                                            <a href="my_profile">
                                                 <i className="fas fa-user-circle"></i> My profile
                                             </a>
                                         </li>

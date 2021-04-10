@@ -7,9 +7,6 @@ import axios from 'axios'
 function MyProfile({ userImages }) {
     const [ session, loading ] = useSession()
     const [images, setImages] = useState(userImages)
-    const [editName, setEditName] = useState(false)
-    const [editShortDesc, setEditShortDesc] = useState(false)
-    const [editLongDesc, setEditLongDesc] = useState(false)
 
   return (
     <div>
